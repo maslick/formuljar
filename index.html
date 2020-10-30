@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Formuljar</title>
+  <style>
+    body {
+      padding: 50px;
+      margin: 0 auto;
+      width: 25%;
+      font-family: monospace;
+    }
+
+    form {
+      padding: 20px;
+    }
+
+    input, textarea, button {
+      margin: 5px;
+      padding: 5px;
+      font-family: monospace;
+      width: 250px;
+    }
+
+    fieldset {
+      padding: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <form action="/form" method="post" id="demo-form">
+      <fieldset>
+        <!-- Name -->
+        <legend align="right">Register</legend>
+        <div>
+          <label>
+            <input name="name" type="text" placeholder="Name" required />
+          </label>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label>
+            <input name="email" type="text" placeholder="Email" required />
+          </label>
+        </div>
+
+        <!-- Phone -->
+        <div>
+          <label>
+            <input name="phone" type="text" placeholder="Phone" required />
+          </label>
+        </div>
+
+        <!-- Message -->
+        <div>
+          <label>
+            <textarea name="message" rows="10" placeholder="Message"></textarea>
+          </label>
+        </div>
+
+        <div>
+          <button class="g-recaptcha"
+                  data-sitekey="%PUBLIC_KEY%"
+                  data-callback='onSubmit'
+                  data-action='submit'>Submit</button>
+        </div>
+      </fieldset>
+
+    </form>
+  </div>
+</body>
+
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+  function onSubmit(token) {
+    document.getElementById("demo-form").submit();
+  }
+</script>
+</html>
+
+
