@@ -7,12 +7,14 @@ const publicKey = process.env.CAPTCHA_PUBLIC || "6LeqCNkZAAAAAMeqnJ7R2UMdUADc8bd
 const secretKey = process.env.CAPTCHA_SECRET || "6LeqCNkZAAAAAPv_lhQTbsA1sH6vI3ovFgVojoaF";
 
 const token = process.env.BOT_TOKEN || "1318860812:AAHRlDHw4hzLKq382OnhCSOVxKxGKB1lMY4";
-const chatId = process.env.CHAT_ID || "-445121005";
+// const chatId = process.env.CHAT_ID || "-445121005";  // formuljar group
+const chatId = process.env.CHAT_ID || "-1001355312960"; // formuljar channel
+// const chatId = process.env.CHAT_ID || "73317272";    // formuljar bot (Pavel Maslov)
 
 const app = express();
 app.use(express.urlencoded({
   extended: true
-}))
+}));
 const port = process.env.PORT || 3000;
 
 app.get('/', function (req, res) {
@@ -27,7 +29,7 @@ app.post('/form', async function (req, res) {
   if (!result)
     res.send("<div>An error occurred! <a href='/'>Try again</a></div>");
   else {
-    res.send(`<div>Thank you, ${name}, for your request. We will contact you. <a href='/'>Back</a></div></div><br>`);
+    res.send(`<div>Dear ${name}! Thanks for your request. We will contact you shortly. <a href='/'>Back</a></div></div><br>`);
     await sendTelegramMessage({
       name: req.body.name,
       email: req.body.email,
@@ -60,7 +62,8 @@ async function sendTelegramMessage(message) {
 
   const mess = {
     chat_id: chatId,
-    text: JSON.stringify(message, null, 4)
+    text: composeMessage(message),
+    parse_mode: "markdown"
   };
 
   try {
@@ -69,6 +72,14 @@ async function sendTelegramMessage(message) {
     console.log(error);
     console.log(error.response.body);
   }
+}
+
+function composeMessage(message) {
+  const mes = `*From:* ${message.name}
+*Email:* ${message.email}
+*Phone:* ${message.phone}
+*Message:* ${message.message}`;
+  return mes;
 }
 
 app.listen(port, '0.0.0.0', () => {

@@ -2,73 +2,146 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Formuljar</title>
   <style>
     body {
-      padding: 50px;
+      min-width: 750px;
       margin: 0 auto;
-      width: 25%;
-      font-family: monospace;
+      font-family: 'Menlo Regular', monospace;
+    }
+
+    #app {
+      height: 100%;
+    }
+
+    #account {
+      padding: 0 0 0 0;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .account {
+      float: none;
+      padding: 20px 0;
+      background-color: #f2f2f2;
+    }
+
+    .navbar {
+      float: none;
+      padding: 12px;
+      background: #fafafa;
+      border-top: 1px solid #dee2e6;
     }
 
     form {
-      padding: 20px;
+      padding: 12px;
+      margin: 50px auto;
+      max-width: 400px;
+      border: 1px #e6e6e6 solid;
+      border-radius: 8px;
+      text-align: center;
     }
 
     input, textarea, button {
-      margin: 5px;
-      padding: 5px;
+      margin: 10px;
+      padding: 10px;
       font-family: monospace;
       width: 250px;
+      border: 1px solid #dee2e6;
     }
 
     fieldset {
       padding: 15px;
+      border: none;
+    }
+
+    button {
+      background-color: rgb(247, 106, 127);
+      border: none;
+      font-size: 13px;
+      height: 100%;
+      margin-top: 15px;
+      color: #fff;
+      cursor: pointer;
+      padding: 12px;
+      border-radius: 6px;
+    }
+
+    @media only screen and (max-width: 768px) {
+      body {
+        min-width: 0;
+        width: 100%;
+      }
+    }
+
+    @media only screen and (max-width: 680px) {
+      form {
+        border: none;
+      }
+    }
+
+    @media only screen and (max-width: 590px) {
+      .navbar {
+        float: none;
+        padding: 12px;
+        background: #fafafa;
+        border-top: 1px solid #dee2e6;
+      }
     }
   </style>
 </head>
 <body>
-  <div>
-    <form action="/form" method="post" id="demo-form">
-      <fieldset>
-        <!-- Name -->
-        <legend align="right">Register</legend>
-        <div>
-          <label>
-            <input name="name" type="text" placeholder="Name" required />
-          </label>
-        </div>
+  <div id="app">
+    <div id="account">
+      <div class="account">
+        Formuljar
+      </div>
+      <div class="navbar"></div>
+    </div>
 
-        <!-- Email -->
-        <div>
-          <label>
-            <input name="email" type="text" placeholder="Email" required />
-          </label>
-        </div>
+    <div id="main">
+      <form action="/form" method="post" id="demo-form">
+        <fieldset>
+          <!-- Name -->
+          <div>
+            <label>
+              <input name="name" type="text" placeholder="Name" required />
+            </label>
+          </div>
 
-        <!-- Phone -->
-        <div>
-          <label>
-            <input name="phone" type="text" placeholder="Phone" required />
-          </label>
-        </div>
+          <!-- Email -->
+          <div>
+            <label>
+              <input name="email" type="text" placeholder="Email" required />
+            </label>
+          </div>
 
-        <!-- Message -->
-        <div>
-          <label>
-            <textarea name="message" rows="10" placeholder="Message"></textarea>
-          </label>
-        </div>
+          <!-- Phone -->
+          <div>
+            <label>
+              <input name="phone" type="text" placeholder="Phone" required />
+            </label>
+          </div>
 
-        <div>
-          <button class="g-recaptcha"
-                  data-sitekey="%PUBLIC_KEY%"
-                  data-callback='onSubmit'
-                  data-action='submit'>Submit</button>
-        </div>
-      </fieldset>
+          <!-- Message -->
+          <div>
+            <label>
+              <textarea name="message" rows="10" placeholder="Message"></textarea>
+            </label>
+          </div>
 
-    </form>
+          <div>
+            <button class="g-recaptcha"
+                    data-sitekey="%PUBLIC_KEY%"
+                    data-callback='onSubmit'
+                    data-action='submit'>SUBMIT</button>
+          </div>
+        </fieldset>
+
+      </form>
+    </div>
   </div>
 </body>
 
