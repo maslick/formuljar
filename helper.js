@@ -2,6 +2,7 @@ const axios = require('axios');
 const config = require("./config");
 const fs = require('fs');
 const path = require('path');
+const {addEntry} = require('./sheets');
 
 async function formHandler(req, res) {
   const captcha = req.body["g-recaptcha-response"];
@@ -20,6 +21,7 @@ async function formHandler(req, res) {
     };
 
     await sendTelegramMessage(message);
+    await sendMessageToSheets(message);
   }
 }
 
@@ -64,6 +66,14 @@ function composeMessage(message) {
 *Phone:* ${message.phone}
 *Message:* ${message.message}`;
   return mes;
+}
+
+async function sendMessageToSheets(message) {
+  const spreadsheetId = "1jrUOrCJtJ-L46P0VjMjN9QK8NPMyU3vGUerGgEacsaE";
+  const sheetName = "Sheet1";
+
+  const data = [message.name, message.email, message.phone, message.message];
+  await addEntry({spreadsheetId, sheetName, data});
 }
 
 function successHtml(name) {
