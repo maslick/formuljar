@@ -1,20 +1,25 @@
 const axios = require('axios');
 const config = require("./config");
+const fs = require('fs');
+const path = require('path');
 
 async function formHandler(req, res) {
   const captcha = req.body["g-recaptcha-response"];
   const result = await verifyCaptchaToken(captcha);
   const name = req.body["name"];
-  if (!result)
-    res.send("<div>An error occurred! <a href='/'>Try again</a></div>");
+  console.log(`captcha: ${result}`);
+  if (!result) res.send(errorHtml());
   else {
-    res.send(`<div>Dear ${name}! Thanks for your request. We will contact you shortly. <a href='/'>Back</a></div></div><br>`);
-    await sendTelegramMessage({
+    res.send(successHtml(name));
+
+    const message = {
       name: req.body.name,
       email: req.body.email,
       phone: req.body.phone,
       message: req.body.message
-    });
+    };
+
+    await sendTelegramMessage(message);
   }
 }
 
@@ -59,6 +64,15 @@ function composeMessage(message) {
 *Phone:* ${message.phone}
 *Message:* ${message.message}`;
   return mes;
+}
+
+function successHtml(name) {
+  let success = fs.readFileSync(path.join(__dirname + '/templates/success.html'), 'utf8');
+  return success.replace("%NAME%", name);
+}
+
+function errorHtml() {
+  return fs.readFileSync(path.join(__dirname + '/templates/error.html'), 'utf8');
 }
 
 module.exports = formHandler;

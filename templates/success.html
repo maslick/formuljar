@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Formuljar</title>
+  <style>
+    body {
+      min-width: 750px;
+      margin: 0 auto;
+      font-family: 'Menlo Regular', monospace;
+    }
+
+    .message {
+      margin: 0 auto;
+      padding: 60px;
+      font-size: 14px;
+    }
+
+    #app {
+      height: 100%;
+    }
+
+    #main {
+      text-align: center;
+    }
+
+    .button {
+      background-color: rgb(247, 106, 127);
+      border: none;
+      font-size: 13px;
+      height: 100%;
+      margin-top: 15px;
+      color: #fff;
+      cursor: pointer;
+      padding: 12px;
+      border-radius: 6px;
+      width: 272px;
+      text-decoration: none;
+    }
+
+    @media only screen and (max-width: 768px) {
+      body {
+        min-width: 0;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div id="main">
+      <div class="message">
+        Hi %NAME%! Thank you for your request. We will contact you shortly...
+      </div>
+      <div>
+        <a href='/' class="button">Back to main page</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

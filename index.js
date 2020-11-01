@@ -10,7 +10,7 @@ app.use(express.urlencoded({
 }));
 
 app.get('/', function (req, res) {
-  let content = fs.readFileSync(path.join(__dirname + '/index.html'), 'utf8');
+  let content = fs.readFileSync(path.join(__dirname + '/templates/index.html'), 'utf8');
   res.send(content.replace("%PUBLIC_KEY%", config.CAPTCHA_PUBLIC));
 });
 
