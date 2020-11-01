@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const {google} = require('googleapis');
-
+const {GOOGLE_CREDENTIALS} = require('./config');
 
 function getAuthConfig() {
   const client = google.auth.fromJSON(getAuthJson());
@@ -38,8 +38,7 @@ async function addEntry({spreadsheetId, sheetName, data}) {
 }
 
 function getAuthJson() {
-  let content = fs.readFileSync(path.join(__dirname + '/credentials.json'), 'utf8');
-  return JSON.parse(content);
+  return JSON.parse(GOOGLE_CREDENTIALS);
 }
 
 module.exports = {
