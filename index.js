@@ -1,87 +1,21 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const axios = require('axios');
-
-const publicKey = process.env.CAPTCHA_PUBLIC || "6LeqCNkZAAAAAMeqnJ7R2UMdUADc8bdClUOOXDFo";
-const secretKey = process.env.CAPTCHA_SECRET || "6LeqCNkZAAAAAPv_lhQTbsA1sH6vI3ovFgVojoaF";
-
-const token = process.env.BOT_TOKEN || "1318860812:AAHRlDHw4hzLKq382OnhCSOVxKxGKB1lMY4";
-// const chatId = process.env.CHAT_ID || "-445121005";  // formuljar group
-const chatId = process.env.CHAT_ID || "-1001355312960"; // formuljar channel
-// const chatId = process.env.CHAT_ID || "73317272";    // formuljar bot (Pavel Maslov)
+const config = require("./config");
+const formHandler = require("./helper");
 
 const app = express();
 app.use(express.urlencoded({
   extended: true
 }));
-const port = process.env.PORT || 3000;
 
 app.get('/', function (req, res) {
   let content = fs.readFileSync(path.join(__dirname + '/index.html'), 'utf8');
-  res.send(content.replace("%PUBLIC_KEY%", publicKey));
+  res.send(content.replace("%PUBLIC_KEY%", config.CAPTCHA_PUBLIC));
 });
 
-app.post('/form', async function (req, res) {
-  const captcha = req.body["g-recaptcha-response"];
-  const result = await verifyToken(captcha);
-  const name = req.body["name"];
-  if (!result)
-    res.send("<div>An error occurred! <a href='/'>Try again</a></div>");
-  else {
-    res.send(`<div>Dear ${name}! Thanks for your request. We will contact you shortly. <a href='/'>Back</a></div></div><br>`);
-    await sendTelegramMessage({
-      name: req.body.name,
-      email: req.body.email,
-      phone: req.body.phone,
-      message: req.body.message
-    });
-  }
-});
+app.post('/form', formHandler);
 
-async function verifyToken(token) {
-  try {
-    const params = new URLSearchParams();
-    params.append('secret', secretKey);
-    params.append('response', token);
-    const response = await axios.post('https://www.google.com/recaptcha/api/siteverify', params);
-    return response.data.success;
-  } catch (error) {
-    console.log(error.response.body);
-    return false;
-  }
-}
-
-async function sendTelegramMessage(message) {
-  const url = `https://api.telegram.org/bot${token}/sendMessage`;
-  const options = {
-    headers: {
-      "content-type": "application/json"
-    }
-  };
-
-  const mess = {
-    chat_id: chatId,
-    text: composeMessage(message),
-    parse_mode: "markdown"
-  };
-
-  try {
-    await axios.post(url, mess, options);
-  } catch (error) {
-    console.log(error);
-    console.log(error.response.body);
-  }
-}
-
-function composeMessage(message) {
-  const mes = `*From:* ${message.name}
-*Email:* ${message.email}
-*Phone:* ${message.phone}
-*Message:* ${message.message}`;
-  return mes;
-}
-
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Starting server on port: ${port}`);
+app.listen(config.PORT, '0.0.0.0', () => {
+  console.log(`Starting server on port: ${config.PORT}`);
 });
