@@ -1,0 +1,81 @@
+Resources:
+  FormuljarBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: ${self:service}-${self:provider.stage}
+      CorsConfiguration:
+        CorsRules:
+          - AllowedOrigins: ['*']
+            AllowedHeaders: ['*']
+            MaxAge: '3000'
+            AllowedMethods: ['GET', 'HEAD']
+
+  FormuljarBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      PolicyDocument:
+        Id: MyPolicy
+        Version: "2012-10-17"
+        Statement:
+          - Sid: CloudFrontOAI
+            Effect: Allow
+            Principal:
+              CanonicalUser: !GetAtt FormuljarOAI.S3CanonicalUserId
+            Action: 's3:Get*'
+            Resource: !Join
+              - ''
+              - - 'arn:aws:s3:::'
+                - !Ref FormuljarBucket
+                - /*
+      Bucket: !Ref FormuljarBucket
+
+  FormuljarOAI:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: "Formuljar OAI"
+
+  FormuljarCDN:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases:
+          - ${self:provider.ui_domain}
+        ViewerCertificate:
+          AcmCertificateArn: ${self:provider.ui_cert}
+          MinimumProtocolVersion: "TLSv1.2_2018"
+          SslSupportMethod: sni-only
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - "GET"
+            - "HEAD"
+            - "OPTIONS"
+          DefaultTTL: 3600
+          ForwardedValues:
+            QueryString: "true"
+            Cookies:
+              Forward: "none"
+          TargetOriginId: "S3Origin"
+          ViewerProtocolPolicy: "redirect-to-https"
+          Compress: true
+        DefaultRootObject: "index.html"
+        CustomErrorResponses:
+          - ErrorCode: '404'
+            ResponsePagePath: '/index.html'
+            ResponseCode: '200'
+            ErrorCachingMinTTL: '5'
+          - ErrorCode: '403'
+            ResponsePagePath: '/index.html'
+            ResponseCode: '200'
+            ErrorCachingMinTTL: '5'
+        Enabled: "true"
+        HttpVersion: http2
+        Origins:
+          - Id: "S3Origin"
+            DomainName: !GetAtt FormuljarBucket.RegionalDomainName
+            S3OriginConfig:
+              OriginAccessIdentity: !Join ["", ["origin-access-identity/cloudfront/", !Ref FormuljarOAI]]
+Outputs:
+  DashboardUrl:
+    Description: Formuljar public DNS name
+    Value: !GetAtt FormuljarCDN.DomainName

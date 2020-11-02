@@ -20,8 +20,10 @@ const GOOGLE_CREDENTIALS = process.env.GOOGLE_CREDENTIALS || `{
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/formuljar-service-account%40formuljar-1604230016895.iam.gserviceaccount.com"
 }`
 
+const HOME_URL = process.env.HOME_URL || '';
+
 const PORT = process.env.PORT || 3000;
 
 module.exports = {
-  CAPTCHA_PUBLIC, CAPTCHA_SECRET, TELEGRAM_CHAT_ID, TELEGRAM_BOT_TOKEN, GOOGLE_CREDENTIALS, PORT
+  CAPTCHA_PUBLIC, CAPTCHA_SECRET, TELEGRAM_CHAT_ID, TELEGRAM_BOT_TOKEN, GOOGLE_CREDENTIALS, HOME_URL, PORT
 }

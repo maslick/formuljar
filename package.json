@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha test"
+    "test": "mocha test",
+    "offline": "sls offline start"
   },
   "author": "pavel.masloff@gmail.com",
   "license": "ISC",
@@ -15,6 +16,8 @@
     "googleapis": "^62.0.0"
   },
   "devDependencies": {
-    "mocha": "^8.2.0"
+    "mocha": "^8.2.0",
+    "serverless": "^2.9.0",
+    "serverless-offline": "^6.8.0"
   }
 }

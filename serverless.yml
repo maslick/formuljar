@@ -1,0 +1,36 @@
+service: formuljar
+frameworkVersion: '2'
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    host: 0.0.0.0
+    httpPort: 3003
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage, 'dev'}
+  coreService: formuljar
+  accountId: ${opt:account, '409637905256'}
+  region: eu-central-1
+  ui_cert: ${opt:ui_cert, "arn:aws:acm:us-east-1:409637905256:certificate/3244fc27-7cce-4a79-b134-7eca6f9a9885"}
+  ui_domain: ${opt:ui_domain, "formuljar.maslick.ru"}
+
+functions:
+  form:
+    handler: handler.form
+    memorySize: 128
+    events:
+      - http:
+          path: /form
+          method: post
+          cors:
+            origin: "*"
+    environment:
+      HOME_URL: "https://formuljar.maslick.ru"
+
+resources:
+  - ${file(./s3-cf.yml)}

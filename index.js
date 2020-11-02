@@ -2,7 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const config = require("./config");
-const formHandler = require("./helper");
+const {formHandler} = require("./helper");
 
 const app = express();
 app.use(express.urlencoded({
@@ -11,7 +11,10 @@ app.use(express.urlencoded({
 
 app.get('/', function (req, res) {
   let content = fs.readFileSync(path.join(__dirname + '/templates/index.html'), 'utf8');
-  res.send(content.replace("%PUBLIC_KEY%", config.CAPTCHA_PUBLIC));
+  content = content.replace("%PUBLIC_KEY%", config.CAPTCHA_PUBLIC);
+  content = content.replace("%API_URL%", "");
+  content = content.replace("%HOME_URL%", "");
+  res.send(content);
 });
 
 app.post('/form', formHandler);
