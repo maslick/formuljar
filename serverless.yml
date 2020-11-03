@@ -39,7 +39,7 @@ functions:
   form:
     handler: handler.form
     memorySize: 128
-    timeout: 20
+    timeout: 5
     events:
       - http:
           path: /form
@@ -50,7 +50,7 @@ functions:
   worker:
     handler: handler.worker
     memorySize: 128
-    timeout: 20
+    timeout: 5
     events:
       - sqs:
           batchSize: 1
