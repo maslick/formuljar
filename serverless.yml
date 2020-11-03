@@ -3,11 +3,15 @@ frameworkVersion: '2'
 
 plugins:
   - serverless-offline
+  - serverless-api-gateway-throttling
 
 custom:
   serverless-offline:
     host: 0.0.0.0
     httpPort: 3003
+  apiGatewayThrottling:
+    maxRequestsPerSecond: 200
+    maxConcurrentRequests: 50
 
 provider:
   name: aws
