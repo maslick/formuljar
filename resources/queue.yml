@@ -1,11 +1,8 @@
 Resources:
-  Queue:
+  FormuljarQueue:
     Type: "AWS::SQS::Queue"
     Properties:
       QueueName: ${self:service}-${self:provider.stage}-sqs-queue
-      VisibilityTimeout: 30
-      MessageRetentionPeriod: 345600
-      ReceiveMessageWaitTimeSeconds: 0
       RedrivePolicy:
         maxReceiveCount: 1
         deadLetterTargetArn:
