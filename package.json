@@ -1,20 +1,23 @@
 {
   "name": "formuljar",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "1.2.0",
+  "description": "a simple web form with extra security",
   "scripts": {
-    "start": "node index.js",
-    "test": "mocha test"
+    "test": "mocha test",
+    "offline": "sls offline start",
+    "deploy": "sls deploy --stage dev --verbose"
   },
   "author": "pavel.masloff@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.783.0",
     "axios": "^0.21.0",
     "express": "^4.17.1",
     "googleapis": "^62.0.0"
   },
   "devDependencies": {
-    "mocha": "^8.2.0"
+    "mocha": "^8.2.0",
+    "serverless": "^2.9.0",
+    "serverless-offline": "^6.8.0"
   }
 }

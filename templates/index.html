@@ -111,7 +111,7 @@
     </div>
 
     <div id="main">
-      <form action="/form" method="post" id="demo-form">
+      <form action="%API_URL%/form" method="post" id="demo-form">
         <fieldset>
           <!-- Name -->
           <div>
@@ -142,7 +142,8 @@
           </div>
 
           <div>
-            <button class="g-recaptcha"
+            <button type="submit"
+                    class="g-recaptcha"
                     data-sitekey="%PUBLIC_KEY%"
                     data-callback='onSubmit'
                     data-action='submit'>SUBMIT</button>

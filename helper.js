@@ -61,11 +61,10 @@ async function sendTelegramMessage(message) {
 }
 
 function composeMessage(message) {
-  const mes = `*From:* ${message.name}
+  return `*From:* ${message.name}
 *Email:* ${message.email}
 *Phone:* ${message.phone}
 *Message:* ${message.message}`;
-  return mes;
 }
 
 async function sendMessageToSheets(message) {
@@ -78,11 +77,20 @@ async function sendMessageToSheets(message) {
 
 function successHtml(name) {
   let success = fs.readFileSync(path.join(__dirname + '/templates/success.html'), 'utf8');
-  return success.replace("%NAME%", name);
+  success = success.replace("%NAME%", name);
+  return success.replace("%HOME_URL%", config.HOME_URL);
 }
 
 function errorHtml() {
-  return fs.readFileSync(path.join(__dirname + '/templates/error.html'), 'utf8');
+  let error = fs.readFileSync(path.join(__dirname + '/templates/error.html'), 'utf8');
+  return error.replace("%HOME_URL%", config.HOME_URL);
 }
 
-module.exports = formHandler;
+module.exports = {
+  formHandler,
+  verifyCaptchaToken,
+  sendTelegramMessage,
+  sendMessageToSheets,
+  successHtml,
+  errorHtml,
+};
