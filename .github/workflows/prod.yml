@@ -55,7 +55,7 @@ jobs:
           npm run deploy
       - name: Set domain
         run: |
-          echo "::set-env name=domain::${{ secrets.PROD_DOMAIN || 'formuljar.maslick.ru' }}"
+          echo "domain=${{ secrets.PROD_DOMAIN || 'formuljar.maslick.ru' }}" >> $GITHUB_ENV
       - name: Deploy to S3 and invalidate cache
         env:
           API_URL: "https://formuljar-api.maslick.ru"
