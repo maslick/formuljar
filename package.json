@@ -1,6 +1,6 @@
 {
   "name": "formuljar",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "a simple web form with extra security",
   "scripts": {
     "test": "mocha test",
@@ -9,6 +9,7 @@
   "author": "pavel.masloff@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.783.0",
     "axios": "^0.21.0",
     "express": "^4.17.1",
     "googleapis": "^62.0.0"
