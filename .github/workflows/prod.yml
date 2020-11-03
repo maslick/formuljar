@@ -1,0 +1,74 @@
+name: PROD-ENV-DEPLOYMENT
+# Build and deploy PROD instance for every push to master
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: rlespinasse/github-slug-action@2.0.0
+
+      - name: Start deployment
+        uses: bobheadxi/deployments@v0.4.2
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: prod
+          ref: ${{ github.head_ref }}
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-qa-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-qa-${{ env.cache-name }}-
+            ${{ runner.os }}-qa-
+            ${{ runner.os }}-
+      - name: Install deps
+        run: |
+          npm ci
+      - name: Deploy serverless stack
+        env:
+          # Use custom API_URI or the default one
+          API_URL: "https://formuljar-api.maslick.ru"
+          CAPTCHA_PUBLIC: ${{ secrets.CAPTCHA_PUBLIC }}
+          CAPTCHA_SECRET: ${{ secrets.CAPTCHA_SECRET }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+        run: |
+          npm run deploy
+      - name: Set domain
+        run: |
+          echo "::set-env name=domain::${{ secrets.PROD_DOMAIN || 'formuljar.maslick.ru' }}"
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+      - name: Deploy to S3 and invalidate cache
+        env:
+          API_URL: "https://formuljar-api.maslick.ru"
+          CAPTCHA_PUBLIC: ${{ secrets.CAPTCHA_PUBLIC }}
+          CLOUFRONT_ID: ${{ secrets.CLOUFRONT_ID }}
+          S3_BUCKET: "formuljar-dev"
+        run: ./s3-sync.sh
+      - name: Update deployment status
+        uses: bobheadxi/deployments@v0.4.2
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          env_url: https://${{ env.domain }}/
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
