@@ -2,7 +2,7 @@ Resources:
   FormuljarQueue:
     Type: "AWS::SQS::Queue"
     Properties:
-      QueueName: ${self:service}-${self:provider.stage}-sqs-queue
+      QueueName: ${self:service}-${self:provider.stage}-queue
       RedrivePolicy:
         maxReceiveCount: 1
         deadLetterTargetArn:
@@ -10,5 +10,5 @@ Resources:
   DeadLetterQueue:
     Type: "AWS::SQS::Queue"
     Properties:
-      QueueName: ${self:service}-${self:provider.stage}-sqs-dlq
+      QueueName: ${self:service}-${self:provider.stage}-dlq
       MessageRetentionPeriod: 1209600 # 14 days in seconds
