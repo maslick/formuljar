@@ -44,7 +44,6 @@ jobs:
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
       - name: Deploy serverless stack
         env:
-          # Use custom API_URI or the default one
           API_URL: "https://formuljar-api.maslick.ru"
           CAPTCHA_PUBLIC: ${{ secrets.CAPTCHA_PUBLIC }}
           CAPTCHA_SECRET: ${{ secrets.CAPTCHA_SECRET }}

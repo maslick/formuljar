@@ -71,7 +71,7 @@ async function sendMessageToSheets(message) {
   const spreadsheetId = "1jrUOrCJtJ-L46P0VjMjN9QK8NPMyU3vGUerGgEacsaE";
   const sheetName = "Sheet1";
 
-  const data = [message.name, message.email, message.phone, message.message];
+  const data = [message.name, message.email, message.phone, message.message, currentTime()];
   await addEntry({spreadsheetId, sheetName, data});
 }
 
@@ -84,6 +84,21 @@ function successHtml(name) {
 function errorHtml() {
   let error = fs.readFileSync(path.join(__dirname + '/templates/error.html'), 'utf8');
   return error.replace("%HOME_URL%", config.HOME_URL);
+}
+
+function currentTime() {
+  const currentdate = new Date();
+  let datetime = currentdate.getDate() + "/"
+    + (currentdate.getMonth() + 1) + "/"
+    + currentdate.getFullYear() + " @ "
+    + currentdate.getHours() + ":"
+    + currentdate.getMinutes() + ":"
+    + currentdate.getSeconds();
+
+  let offset = -currentdate.getTimezoneOffset() / 60;
+  if (offset > 0) offset = `+${offset}`;
+  datetime += ` GMT${offset}`;
+  return datetime;
 }
 
 module.exports = {
