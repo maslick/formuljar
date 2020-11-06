@@ -96,7 +96,7 @@ function currentTime() {
     + currentdate.getSeconds();
 
   let offset = -currentdate.getTimezoneOffset() / 60;
-  if (offset > 0) offset = `+${offset}`;
+  if (offset >= 0) offset = `+${offset}`;
   datetime += ` GMT${offset}`;
   return datetime;
 }
