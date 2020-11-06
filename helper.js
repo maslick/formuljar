@@ -87,15 +87,24 @@ function errorHtml() {
 }
 
 function currentTime() {
-  const currentdate = new Date();
-  let datetime = currentdate.getDate() + "/"
-    + (currentdate.getMonth() + 1) + "/"
-    + currentdate.getFullYear() + " @ "
-    + currentdate.getHours() + ":"
-    + currentdate.getMinutes() + ":"
-    + currentdate.getSeconds();
+  let now = new Date();
+  let hour = now.getHours();
+  let minute = now.getMinutes();
+  let second = now.getSeconds();
 
-  let offset = -currentdate.getTimezoneOffset() / 60;
+  if (hour   < 10) { hour   = "0" + hour;   }
+  if (minute < 10) { minute = "0" + minute; }
+  if (second < 10) { second = "0" + second; }
+
+
+  let datetime = now.getDate() + "/"
+    + (now.getMonth() + 1) + "/"
+    + now.getFullYear() + " @ "
+    + hour + ":"
+    + minute + ":"
+    + second;
+
+  let offset = -now.getTimezoneOffset() / 60;
   if (offset >= 0) offset = `+${offset}`;
   datetime += ` GMT${offset}`;
   return datetime;
