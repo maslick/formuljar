@@ -99,7 +99,7 @@ function currentTime() {
 
   let datetime = now.getDate() + "/"
     + (now.getMonth() + 1) + "/"
-    + now.getFullYear() + " @ "
+    + now.getFullYear() + " "
     + hour + ":"
     + minute + ":"
     + second;
