@@ -53,6 +53,10 @@
       border: 1px solid #dee2e6;
     }
 
+    textarea {
+      resize: vertical;
+    }
+
     fieldset {
       padding: 15px;
       border: none;
@@ -116,28 +120,28 @@
           <!-- Name -->
           <div>
             <label>
-              <input name="name" type="text" placeholder="Name" value="John Snow" required />
+              <input id="name" name="name" type="text" placeholder="Name" />
             </label>
           </div>
 
           <!-- Email -->
           <div>
             <label>
-              <input name="email" type="text" placeholder="Email" value="jonh.snow@gmail.com" required />
+              <input id="email" name="email" type="text" placeholder="Email" />
             </label>
           </div>
 
           <!-- Phone -->
           <div>
             <label>
-              <input name="phone" type="text" placeholder="Phone" value="+386 123 45678" required />
+              <input id="phone" name="phone" type="text" placeholder="Phone" />
             </label>
           </div>
 
           <!-- Message -->
           <div>
             <label>
-              <textarea name="message" rows="10" placeholder="Message">Hello there, I found your contact info on google.com and wanted to reconnect.</textarea>
+              <textarea id="message" name="message" rows="10" placeholder="Message"></textarea>
             </label>
           </div>
 
@@ -160,5 +164,101 @@
   function onSubmit(token) {
     document.getElementById("demo-form").submit();
   }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const name = randomName();
+    document.getElementById("name").value = name;
+    document.getElementById("email").value = randomEmail(name);
+    document.getElementById("phone").value = randomPhone();
+    document.getElementById("message").value = randomFromArray(DATA.message);
+  }, false);
+
+  const DATA = {
+    names: {
+      first: [
+        "James", "John", "Robert", "Michael", "William", "David", "Richard",
+        "Joseph", "Charles", "Thomas", "Christopher", "Daniel", "Matthew",
+        "Donald", "Anthony", "Paul", "Mark", "George", "Steven", "Kenneth",
+        "Andrew", "Edward", "Brian", "Joshua", "Kevin", "Ronald", "Timothy",
+        "Jason", "Jeffrey", "Gary", "Ryan", "Nicholas", "Eric", "Stephen",
+        "Jacob", "Larry", "Frank", "Jonathan", "Scott", "Justin", "Raymond",
+        "Brandon", "Gregory", "Samuel", "Patrick", "Benjamin", "Jack",
+        "Dennis", "Jerry", "Alexander", "Tyler", "Douglas", "Henry", "Peter",
+        "Walter", "Aaron", "Jose", "Adam", "Harold", "Zachary", "Nathan",
+        "Carl", "Kyle", "Arthur", "Gerald", "Lawrence", "Roger", "Albert",
+        "Keith", "Jeremy", "Terry", "Joe", "Sean", "Willie", "Jesse",
+        "Ralph", "Billy", "Austin", "Bruce", "Christian", "Roy", "Bryan",
+        "Eugene", "Louis", "Harry", "Wayne", "Ethan", "Jordan", "Russell",
+        "Alan", "Philip", "Randy", "Juan", "Howard", "Vincent", "Bobby",
+        "Dylan", "Johnny", "Phillip", "Craig",
+        "Mary", "Patricia", "Elizabeth", "Jennifer", "Linda", "Barbara",
+        "Susan", "Margaret", "Jessica", "Dorothy", "Sarah", "Karen", "Nancy",
+        "Betty", "Lisa", "Sandra", "Helen", "Donna", "Ashley", "Kimberly",
+        "Carol", "Michelle", "Amanda", "Emily", "Melissa", "Laura", "Deborah",
+        "Stephanie", "Rebecca", "Sharon", "Cynthia", "Ruth", "Kathleen",
+        "Anna", "Shirley", "Amy", "Angela", "Virginia", "Brenda", "Pamela",
+        "Catherine", "Katherine", "Nicole", "Christine", "Janet", "Debra",
+        "Carolyn", "Samantha", "Rachel", "Heather", "Maria", "Diane",
+        "Frances", "Joyce", "Julie", "Martha", "Joan", "Evelyn", "Kelly",
+        "Christina", "Emma", "Lauren", "Alice", "Judith", "Marie", "Doris",
+        "Ann", "Jean", "Victoria", "Cheryl", "Megan", "Kathryn", "Andrea",
+        "Jacqueline", "Gloria", "Teresa", "Janice", "Sara", "Rose", "Julia",
+        "Hannah", "Theresa", "Judy", "Mildred", "Grace", "Beverly", "Denise",
+        "Marilyn", "Amber", "Danielle", "Brittany", "Diana", "Jane", "Lori",
+        "Olivia", "Tiffany", "Kathy", "Tammy", "Crystal", "Madison"
+      ],
+
+      last: [
+        "Smith", "Johnson", "Williams", "Jones", "Brown", "Davis",
+        "Miller", "Wilson", "Moore", "Taylor", "Anderson", "Thomas",
+        "Jackson", "White", "Harris", "Martin", "Thompson", "Garcia",
+        "Martinez", "Robinson", "Clark", "Rodriguez", "Lewis", "Lee",
+        "Walker", "Hall", "Allen", "Young", "Hernandez", "King",
+        "Wright", "Lopez", "Hill", "Scott", "Green", "Adams", "Baker",
+        "Gonzalez", "Nelson", "Carter", "Mitchell", "Perez", "Roberts",
+        "Turner", "Phillips", "Campbell", "Parker", "Evans", "Edwards",
+        "Collins", "Stewart", "Sanchez", "Morris", "Rogers", "Reed",
+        "Cook", "Morgan", "Bell", "Murphy", "Bailey", "Rivera",
+        "Cooper", "Richardson", "Cox", "Howard", "Ward", "Torres",
+        "Peterson", "Gray", "Ramirez", "James", "Watson", "Brooks",
+        "Kelly", "Sanders", "Price", "Bennett", "Wood", "Barnes",
+        "Ross", "Henderson", "Coleman", "Jenkins", "Perry", "Powell",
+        "Long", "Patterson", "Hughes", "Flores", "Washington", "Butler",
+        "Simmons", "Foster", "Gonzales", "Bryant", "Alexander",
+        "Russell", "Griffin", "Diaz", "Hayes"
+      ]
+    },
+    message: [
+      "Hello there, I found your contact info on google.com and wanted to reconnect.",
+      "Hi there. Count me in!",
+      "Hey, didn't mean to bother you, but I really love what you guyz are doing! Thank you!",
+      "Looking forward to our cooperation!",
+      "Sorry, do you have any space left?",
+      "Do you ship to Slovenia?",
+      "Where is your office located?",
+      "Do you accept VISA/Mastercard?",
+      "When does the next course start? Can't wait to join you!"
+    ]
+  };
+
+  function randomFromArray(items) {
+    return items[Math.floor(Math.random() * items.length)];
+  }
+
+  function randomName() {
+    return `${randomFromArray(DATA.names.first)} ${randomFromArray(DATA.names.last)}`;
+  }
+
+  function randomEmail(name) {
+    name = name.toLowerCase();
+    name = name.replace(" ", ".")
+    return `${name}@gmail.com`;
+  }
+
+  function randomPhone() {
+    return `+386${Math.floor(Math.random() * 1000000000)}`.substring(0,12);
+  }
+
+
 </script>
 </html>
