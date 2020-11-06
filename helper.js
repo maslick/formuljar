@@ -88,18 +88,23 @@ function errorHtml() {
 
 function currentTime() {
   let now = new Date();
+
+  let year = now.getFullYear();
+  let month = now.getMonth() + 1;
+  let date = now.getDate();
   let hour = now.getHours();
   let minute = now.getMinutes();
   let second = now.getSeconds();
 
+  if (month  < 10) { month  = "0" + month;  }
+  if (date   < 10) { date   = "0" + date;   }
   if (hour   < 10) { hour   = "0" + hour;   }
   if (minute < 10) { minute = "0" + minute; }
   if (second < 10) { second = "0" + second; }
 
-
-  let datetime = now.getDate() + "/"
-    + (now.getMonth() + 1) + "/"
-    + now.getFullYear() + " "
+  let datetime = date + "/"
+    + month + "/"
+    + year + " "
     + hour + ":"
     + minute + ":"
     + second;
