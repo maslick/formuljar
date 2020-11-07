@@ -72,7 +72,7 @@ functions:
               - FormuljarQueue
               - Arn
     warmup:
-      enabled: true
+      enabled: false
 
 resources:
   - ${file(./resources/s3-cf.yml)}
