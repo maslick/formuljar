@@ -5,7 +5,8 @@
   "scripts": {
     "test": "mocha test",
     "offline": "sls offline start",
-    "deploy": "sls deploy --stage dev --verbose"
+    "deploy": "sls deploy --stage dev --verbose",
+    "test-static": "dist.sh && cd dist && npx http-server -a localhost -p 8080"
   },
   "author": "pavel.masloff@gmail.com",
   "license": "ISC",
@@ -16,6 +17,7 @@
     "googleapis": "^62.0.0"
   },
   "devDependencies": {
+    "http-server": "^0.12.3",
     "mocha": "^8.2.0",
     "serverless": "^2.9.0",
     "serverless-api-gateway-throttling": "^1.0.1",
