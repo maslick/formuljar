@@ -3,7 +3,7 @@ const {verifyCaptchaToken, sendTelegramMessage, sendMessageToSheets, successHtml
 const querystring = require('querystring');
 const aws = require("aws-sdk");
 
-const headers = {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"};
+const headers = {"Content-Type": "text/html", "Access-Control-Allow-Origin": "*"};
 const sqs = new aws.SQS({apiVersion: '2012-11-05'});
 
 module.exports.form = async (event) => {
