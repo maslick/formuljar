@@ -4,6 +4,7 @@ frameworkVersion: '2'
 plugins:
   - serverless-offline
   - serverless-api-gateway-throttling
+  - serverless-plugin-warmup
 
 custom:
   serverless-offline:
@@ -12,6 +13,8 @@ custom:
   apiGatewayThrottling:
     maxRequestsPerSecond: 200
     maxConcurrentRequests: 50
+  warmup:
+    prewarm: true
 
 provider:
   name: aws
@@ -30,6 +33,10 @@ provider:
         Fn::GetAtt:
           - FormuljarQueue
           - Arn
+    - Effect: 'Allow'
+      Action:
+        - 'lambda:InvokeFunction'
+      Resource: "*"
   environment:
     CAPTCHA_PUBLIC: ${env:CAPTCHA_PUBLIC}
     CAPTCHA_SECRET: ${env:CAPTCHA_SECRET}
@@ -50,6 +57,8 @@ functions:
           method: post
           cors:
             origin: "*"
+    warmup:
+      enabled: true
 
   worker:
     handler: handler.worker
@@ -62,6 +71,8 @@ functions:
             Fn::GetAtt:
               - FormuljarQueue
               - Arn
+    warmup:
+      enabled: true
 
 resources:
   - ${file(./resources/s3-cf.yml)}

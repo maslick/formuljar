@@ -7,6 +7,10 @@ const headers = {"Content-Type": "text/html"};
 const sqs = new aws.SQS({apiVersion: '2012-11-05'});
 
 module.exports.form = async (event) => {
+  if (event.source === 'serverless-plugin-warmup') {
+    console.log('WarmUp - Lambda is warm!');
+    return 'Lambda is warm!';
+  }
   const body = querystring.decode(event.body);
   console.log("event body: " + JSON.stringify(body));
   const captcha = body["g-recaptcha-response"];
@@ -53,6 +57,10 @@ module.exports.form = async (event) => {
 };
 
 module.exports.worker = async event => {
+  if (event.source === 'serverless-plugin-warmup') {
+    console.log('WarmUp - Lambda is warm!');
+    return 'Lambda is warm!';
+  }
   console.log("number of messages: " + event.Records.length);
   for (const value of event.Records) {
     const mes = JSON.parse(value.body);
