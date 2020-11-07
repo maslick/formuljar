@@ -5,10 +5,16 @@
 : "${CLOUDFRONT_ID:="E2AODUM7T4OB8O"}"
 : "${S3_BUCKET:="formuljar-dev"}"
 
-template=$(<static/index.html)
-result="${template//%API_URL%/$API_URL}"
-result="${result//%PUBLIC_KEY%/$CAPTCHA_PUBLIC}"
-cat <<< "$result" > static/index.html
+function substitute() {
+    input_file=$1
+    template=$(<"$input_file")
+    result="${template//%API_URL%/$API_URL}"
+    result="${result//%PUBLIC_KEY%/$CAPTCHA_PUBLIC}"
+    cat <<< "$result" > $input_file
+}
+
+substitute "static/index.html"
+substitute "static/app.js"
 
 aws s3 sync ./static s3://$S3_BUCKET
 aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_ID --paths "/*"
