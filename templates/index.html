@@ -174,60 +174,17 @@
   }, false);
 
   const DATA = {
-    names: {
-      first: [
-        "James", "John", "Robert", "Michael", "William", "David", "Richard",
-        "Joseph", "Charles", "Thomas", "Christopher", "Daniel", "Matthew",
-        "Donald", "Anthony", "Paul", "Mark", "George", "Steven", "Kenneth",
-        "Andrew", "Edward", "Brian", "Joshua", "Kevin", "Ronald", "Timothy",
-        "Jason", "Jeffrey", "Gary", "Ryan", "Nicholas", "Eric", "Stephen",
-        "Jacob", "Larry", "Frank", "Jonathan", "Scott", "Justin", "Raymond",
-        "Brandon", "Gregory", "Samuel", "Patrick", "Benjamin", "Jack",
-        "Dennis", "Jerry", "Alexander", "Tyler", "Douglas", "Henry", "Peter",
-        "Walter", "Aaron", "Jose", "Adam", "Harold", "Zachary", "Nathan",
-        "Carl", "Kyle", "Arthur", "Gerald", "Lawrence", "Roger", "Albert",
-        "Keith", "Jeremy", "Terry", "Joe", "Sean", "Willie", "Jesse",
-        "Ralph", "Billy", "Austin", "Bruce", "Christian", "Roy", "Bryan",
-        "Eugene", "Louis", "Harry", "Wayne", "Ethan", "Jordan", "Russell",
-        "Alan", "Philip", "Randy", "Juan", "Howard", "Vincent", "Bobby",
-        "Dylan", "Johnny", "Phillip", "Craig",
-        "Mary", "Patricia", "Elizabeth", "Jennifer", "Linda", "Barbara",
-        "Susan", "Margaret", "Jessica", "Dorothy", "Sarah", "Karen", "Nancy",
-        "Betty", "Lisa", "Sandra", "Helen", "Donna", "Ashley", "Kimberly",
-        "Carol", "Michelle", "Amanda", "Emily", "Melissa", "Laura", "Deborah",
-        "Stephanie", "Rebecca", "Sharon", "Cynthia", "Ruth", "Kathleen",
-        "Anna", "Shirley", "Amy", "Angela", "Virginia", "Brenda", "Pamela",
-        "Catherine", "Katherine", "Nicole", "Christine", "Janet", "Debra",
-        "Carolyn", "Samantha", "Rachel", "Heather", "Maria", "Diane",
-        "Frances", "Joyce", "Julie", "Martha", "Joan", "Evelyn", "Kelly",
-        "Christina", "Emma", "Lauren", "Alice", "Judith", "Marie", "Doris",
-        "Ann", "Jean", "Victoria", "Cheryl", "Megan", "Kathryn", "Andrea",
-        "Jacqueline", "Gloria", "Teresa", "Janice", "Sara", "Rose", "Julia",
-        "Hannah", "Theresa", "Judy", "Mildred", "Grace", "Beverly", "Denise",
-        "Marilyn", "Amber", "Danielle", "Brittany", "Diana", "Jane", "Lori",
-        "Olivia", "Tiffany", "Kathy", "Tammy", "Crystal", "Madison"
-      ],
-
-      last: [
-        "Smith", "Johnson", "Williams", "Jones", "Brown", "Davis",
-        "Miller", "Wilson", "Moore", "Taylor", "Anderson", "Thomas",
-        "Jackson", "White", "Harris", "Martin", "Thompson", "Garcia",
-        "Martinez", "Robinson", "Clark", "Rodriguez", "Lewis", "Lee",
-        "Walker", "Hall", "Allen", "Young", "Hernandez", "King",
-        "Wright", "Lopez", "Hill", "Scott", "Green", "Adams", "Baker",
-        "Gonzalez", "Nelson", "Carter", "Mitchell", "Perez", "Roberts",
-        "Turner", "Phillips", "Campbell", "Parker", "Evans", "Edwards",
-        "Collins", "Stewart", "Sanchez", "Morris", "Rogers", "Reed",
-        "Cook", "Morgan", "Bell", "Murphy", "Bailey", "Rivera",
-        "Cooper", "Richardson", "Cox", "Howard", "Ward", "Torres",
-        "Peterson", "Gray", "Ramirez", "James", "Watson", "Brooks",
-        "Kelly", "Sanders", "Price", "Bennett", "Wood", "Barnes",
-        "Ross", "Henderson", "Coleman", "Jenkins", "Perry", "Powell",
-        "Long", "Patterson", "Hughes", "Flores", "Washington", "Butler",
-        "Simmons", "Foster", "Gonzales", "Bryant", "Alexander",
-        "Russell", "Griffin", "Diaz", "Hayes"
-      ]
-    },
+    names: [
+      "Sponge Bob", "Bugs Bunny", "Scooby Doo", "Tom Cat", "Jerry Mouse", "Daffy Duck", "Mickey Mouse",
+      "Donald Duck", "Homer Simpson", "Spider Man", "Woody Woodpecker", "Fred Flinstone", "Bart Simpson",
+      "Bat Man", "Pink Panther", "Stewie Griffin", "Porky Pig", "Patrick Star", "Yogi Bear", "Squidwart Tentacles",
+      "Buzz Lightyear", "Scrooge McDuck", "Chip Dale", "Peter Griffin", "Garfield Cat", "Brian Griffin",
+      "Lisa Simpson", "Barney Rubble", "Maggie Simpson", "Pluto Dog", "Kermit Frog", "Papa Smurf", "Marge Simpson",
+      "Tommy Pickles", "Optimus Prime", "Casper Ghost", "Super Man", "Mr Krabs", "Bullwinkle Moose", "Iron Man",
+      "Lola Bunny", "Kenny McCormick", "Sandy Cheeks", "Alvin Seville", "Lilo Pelekai", "Johnny Bravo",
+      "Captain Hook", "Inspector Gadget", "Butters Stotch", "Mighty Mouse", "Darkwing Duck", "Felix Cat",
+      "Kim Possible", "Snow White", "Rocky Squirrel", "Droopy Dog", "George Jetson", "Minnie Mouse"
+    ],
     message: [
       "Hello there, I found your contact info on google.com and wanted to reconnect.",
       "Hi there. Count me in!",
@@ -247,13 +204,13 @@
   }
 
   function randomName() {
-    return `${randomFromArray(DATA.names.first)} ${randomFromArray(DATA.names.last)}`;
+    return randomFromArray(DATA.names);
   }
 
   function randomEmail(name) {
     name = name.toLowerCase();
     name = name.replace(" ", ".")
-    return `${name}@gmail.com`;
+    return `${name}@disney.com`;
   }
 
   function randomPhone() {
