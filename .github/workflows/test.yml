@@ -52,7 +52,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN_TEST }}
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS_TEST }}
         run: |
-          sls deploy --stage dev --verbose
+          npx sls deploy --stage dev --verbose
       - name: Set domain
         run: |
           echo "domain=${{ secrets.PROD_DOMAIN_TEST || 'formuljar-test.maslick.ru' }}" >> $GITHUB_ENV
