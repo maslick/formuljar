@@ -51,7 +51,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
         run: |
-          npx sls deploy --stage dev --verbose
+          npm run deploy-prod
       - name: Set domain
         run: |
           echo "domain=${{ secrets.PROD_DOMAIN || 'formuljar.maslick.ru' }}" >> $GITHUB_ENV
