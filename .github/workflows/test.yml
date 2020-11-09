@@ -20,7 +20,7 @@ jobs:
         with:
           step: start
           token: ${{ secrets.GITHUB_TOKEN }}
-          env: prod
+          env: test
           ref: ${{ github.head_ref }}
 
       - name: Cache node modules
