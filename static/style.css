@@ -55,6 +55,20 @@ fieldset {
     border: none;
 }
 
+.button {
+    background-color: rgb(247, 106, 127);
+    border: none;
+    font-size: 13px;
+    height: 100%;
+    margin-top: 15px;
+    color: #fff;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 6px;
+    width: 272px;
+    text-decoration: none;
+}
+
 #submit {
     background-color: rgb(247, 106, 127);
     border: none;

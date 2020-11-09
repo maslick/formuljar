@@ -42,10 +42,10 @@ function onSubmit(e) {
   grecaptcha.ready(async () => {
     const token = await grecaptcha.execute('%PUBLIC_KEY%', {action: 'submit'});
     console.log(`token: ${token}`);
-
     const parsed = parseForm();
 
     try {
+      hideForm();
       let payload = {
         name: parsed.name,
         email: parsed.email,
@@ -65,10 +65,22 @@ function onSubmit(e) {
       let js = await response.json();
       let status = response.status;
       if (status === 200){
-        document.getElementById("status").innerHTML = `Hi <b>${js.name}!</b><br>Thank you for your request,<br>we will contact you shortly...`;
-        randomizeForm();
+        document.getElementById("status").innerHTML = `
+          <div style="padding: 20px 0">
+            Hi <b>${js.name}!</b><br>Thank you for your request,<br>we will contact you shortly...
+          </div>
+          <p>
+            <a href='/' class="button">Back to main page</a>
+          </p>
+        `;
       } else {
-        document.getElementById("status").innerHTML = `${js.message} Try again`;
+        document.getElementById("status").innerHTML = `
+          <div style="padding: 20px 0">
+            ${js.message}
+          </div>
+          <p>
+            <a href='/' class="button">Try again</a>
+          </p>`;
       }
     } catch (e) {
       document.getElementById("status").innerHTML = e.toString();
@@ -117,4 +129,8 @@ function randomEmail(name) {
 
 function randomPhone() {
   return `+386${Math.floor(Math.random() * 1000000000)}`.substring(0,12);
+}
+
+function hideForm() {
+  document.getElementById("demo-form").hidden = true;
 }
