@@ -43,27 +43,35 @@ function onSubmit(e) {
     const token = await grecaptcha.execute('%PUBLIC_KEY%', {action: 'submit'});
     console.log(`token: ${token}`);
 
-    const message = new URLSearchParams();
     const parsed = parseForm();
-    message.set("name", parsed.name);
-    message.set("email", parsed.email);
-    message.set("phone", parsed.phone);
-    message.set("message", parsed.message);
-    message.set("g-recaptcha-response", token);
 
-    let response = await fetch('%API_URL%/form', {
-      method: 'POST',
-      headers: {
-        'Accept': "application/json"
-      },
-      body: message
-    });
+    try {
+      let payload = {
+        name: parsed.name,
+        email: parsed.email,
+        phone: parsed.phone,
+        message: parsed.message,
+        "g-recaptcha-response": token
+      };
+      let response = await fetch('%API_URL%/form', {
+        method: 'POST',
+        headers: {
+          'Accept': "application/json",
+          'Content-Type': "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
 
-    let js = await response.json();
-    let status = response.status;
-    if (status === 200){
-      document.getElementById("status").innerHTML = `Hi <b>${js.name}!</b><br>Thank you for your request,<br>we will contact you shortly...`;
-      randomizeForm();
+      let js = await response.json();
+      let status = response.status;
+      if (status === 200){
+        document.getElementById("status").innerHTML = `Hi <b>${js.name}!</b><br>Thank you for your request,<br>we will contact you shortly...`;
+        randomizeForm();
+      } else {
+        document.getElementById("status").innerHTML = `${js.message} Try again`;
+      }
+    } catch (e) {
+      document.getElementById("status").innerHTML = e.toString();
     }
   });
 }

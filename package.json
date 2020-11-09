@@ -4,9 +4,9 @@
   "description": "a simple web form with extra security",
   "scripts": {
     "test": "mocha test",
-    "offline": "sls offline start",
+    "offline": "sls offline start --stage test",
     "deploy": "sls deploy --stage dev --verbose",
-    "test-static": "./dist.sh && cd dist && npx http-server -a localhost -p 8081"
+    "test-static": "./dist.sh && cd dist && npx http-server -a localhost -p 8080"
   },
   "author": "pavel.masloff@gmail.com",
   "license": "ISC",
