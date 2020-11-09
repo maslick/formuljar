@@ -61,7 +61,7 @@ jobs:
           API_URL: ${{ secrets.API_URL_TEST || 'https://formuljar-api.maslick.ru' }}
           CAPTCHA_PUBLIC: ${{ secrets.CAPTCHA_PUBLIC_TEST }}
           CLOUFRONT_ID: ${{ secrets.CLOUFRONT_ID_TEST }}
-          S3_BUCKET: ${{ secrets.S3_BUCKET_TEST || "formuljar-test" }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET_TEST || 'formuljar-test' }}
         run: ./s3-sync.sh
       - name: Update deployment status
         uses: bobheadxi/deployments@v0.4.2
