@@ -19,6 +19,9 @@ module.exports.form = async (event) => {
   const name = body["name"];
   console.log(`captcha: ${result}`);
 
+  const acceptHeader = event.headers["Accept"] || event.headers["accept"];
+  console.log("Requested response format:" + acceptHeader);
+
   if (!result) return {
     statusCode: 200,
     headers,
@@ -40,6 +43,15 @@ module.exports.form = async (event) => {
       MessageBody: JSON.stringify(message),
       DelaySeconds: 0,
     }).promise();
+
+    if (acceptHeader.toLowerCase() === "application/json") {
+      headers["Content-Type"] = "application/json";
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify(message)
+      }
+    }
 
     return {
       statusCode: 200,

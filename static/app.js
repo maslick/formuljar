@@ -1,16 +1,13 @@
 // API_URL: %API_URL%
 // PUBLIC_KEY: %PUBLIC_KEY%
 
-function onSubmit(token) {
-  document.getElementById("demo-form").submit();
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-  const name = randomName();
-  document.getElementById("name").value = name;
-  document.getElementById("email").value = randomEmail(name);
-  document.getElementById("phone").value = randomPhone();
-  document.getElementById("message").value = randomFromArray(DATA.message);
+  randomizeForm();
+  document.getElementById("reset").onclick = ev => {
+    onReset(ev);
+    randomizeForm();
+    clearStatus();
+  }
 }, false);
 
 const DATA = {
@@ -38,6 +35,63 @@ const DATA = {
     "Hello, is there a way I can get my money back? Regards."
   ]
 };
+
+function onSubmit(e) {
+  e.preventDefault();
+  clearStatus();
+  grecaptcha.ready(async () => {
+    const token = await grecaptcha.execute('%PUBLIC_KEY%', {action: 'submit'});
+    console.log(`token: ${token}`);
+
+    const message = new URLSearchParams();
+    const parsed = parseForm();
+    message.set("name", parsed.name);
+    message.set("email", parsed.email);
+    message.set("phone", parsed.phone);
+    message.set("message", parsed.message);
+    message.set("g-recaptcha-response", token);
+
+    let response = await fetch('%API_URL%/form', {
+      method: 'POST',
+      headers: {
+        'Accept': "application/json"
+      },
+      body: message
+    });
+
+    let js = await response.json();
+    let status = response.status;
+    if (status === 200){
+      document.getElementById("status").innerHTML = `Hi <b>${js.name}!</b><br>Thank you for your request,<br>we will contact you shortly...`;
+      randomizeForm();
+    }
+  });
+}
+
+function onReset(e) {
+  e.preventDefault();
+  randomizeForm();
+}
+
+function randomizeForm() {
+  const name = randomName();
+  document.getElementById("name").value = name;
+  document.getElementById("email").value = randomEmail(name);
+  document.getElementById("phone").value = randomPhone();
+  document.getElementById("message").value = randomFromArray(DATA.message);
+}
+
+function parseForm() {
+  const name = document.getElementById("name").value || "Jacky Chan";
+  const email = document.getElementById("email").value || "jacky.chan@gmail.com";
+  const phone = document.getElementById("phone").value || "+1234567890";
+  const message = document.getElementById("message").value || "hello world!";
+  return {name, email, phone, message};
+}
+
+function clearStatus() {
+  document.getElementById("status").innerText = "";
+}
 
 function randomFromArray(items) {
   return items[Math.floor(Math.random() * items.length)];

@@ -6,7 +6,7 @@
     "test": "mocha test",
     "offline": "sls offline start",
     "deploy": "sls deploy --stage dev --verbose",
-    "test-static": "dist.sh && cd dist && npx http-server -a localhost -p 8080"
+    "test-static": "./dist.sh && cd dist && npx http-server -a localhost -p 8081"
   },
   "author": "pavel.masloff@gmail.com",
   "license": "ISC",
