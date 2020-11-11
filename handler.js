@@ -1,9 +1,7 @@
 'use strict';
-const {verifyCaptchaToken, sendTelegramMessage, sendMessageToSheets, successHtml, errorHtml} = require("./helper");
-const querystring = require('querystring');
+const {verifyCaptchaToken, sendTelegramMessage, sendMessageToSheets} = require("./helper");
 const aws = require("aws-sdk");
 
-const headers = {"Content-Type": "text/html", "Access-Control-Allow-Origin": "*"};
 const sqs = new aws.SQS({apiVersion: '2012-11-05'});
 
 module.exports.form = async (event) => {
@@ -11,7 +9,7 @@ module.exports.form = async (event) => {
     console.log('WarmUp - Lambda is warm!');
     return 'Lambda is warm!';
   }
-  const body = querystring.decode(event.body);
+  const body = JSON.parse(event.body);
   console.log("event body: " + JSON.stringify(body));
   const captcha = body["g-recaptcha-response"];
   console.log(captcha);
@@ -19,10 +17,11 @@ module.exports.form = async (event) => {
   const name = body["name"];
   console.log(`captcha: ${result}`);
 
+  const headers = {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"};
   if (!result) return {
-    statusCode: 200,
+    statusCode: 403,
     headers,
-    body: errorHtml()
+    body: JSON.stringify({message: "An error occurred!"})
   };
 
   const message = {
@@ -44,14 +43,14 @@ module.exports.form = async (event) => {
     return {
       statusCode: 200,
       headers,
-      body: successHtml(name)
-    };
+      body: JSON.stringify(message)
+    }
   } catch (err) {
     console.log(err, err.stack);
     return {
       statusCode: 500,
       headers,
-      body: err
+      body: JSON.stringify({message: "An error occurred!", details: err})
     };
   }
 };

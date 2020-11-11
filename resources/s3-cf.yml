@@ -39,10 +39,9 @@ Resources:
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
-        Aliases:
-          - ${self:provider.ui_domain}
+        Aliases: ${self:custom.${self:provider.stage}.ui_domain}
         ViewerCertificate:
-          AcmCertificateArn: ${self:provider.ui_cert}
+          AcmCertificateArn: ${self:custom.${self:provider.stage}.ui_cert}
           MinimumProtocolVersion: "TLSv1.2_2018"
           SslSupportMethod: sni-only
         DefaultCacheBehavior:

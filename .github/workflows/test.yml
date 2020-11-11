@@ -1,9 +1,10 @@
-name: PROD-ENV-DEPLOYMENT
-# Build and deploy PROD instance for every push to master
+name: TEST-ENV-DEPLOYMENT
+# Build and deploy TEST instance for every push to a pull-request
 
 on:
-  push:
-    branches: [master]
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches: ["*"]
 
 jobs:
   deploy:
@@ -19,7 +20,7 @@ jobs:
         with:
           step: start
           token: ${{ secrets.GITHUB_TOKEN }}
-          env: prod
+          env: test
           ref: ${{ github.head_ref }}
 
       - name: Cache node modules
@@ -44,23 +45,23 @@ jobs:
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
       - name: Deploy serverless stack
         env:
-          API_URL: ${{ secrets.API_URL || 'https://formuljar-api.maslick.ru' }}
-          CAPTCHA_PUBLIC: ${{ secrets.CAPTCHA_PUBLIC }}
-          CAPTCHA_SECRET: ${{ secrets.CAPTCHA_SECRET }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          API_URL: ${{ secrets.API_URL_TEST || 'https://formuljar-api.maslick.ru' }}
+          CAPTCHA_PUBLIC: ${{ secrets.CAPTCHA_PUBLIC_TEST }}
+          CAPTCHA_SECRET: ${{ secrets.CAPTCHA_SECRET_TEST }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID_TEST }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN_TEST }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS_TEST }}
         run: |
-          npm run deploy-prod
+          npm run deploy-test
       - name: Set domain
         run: |
-          echo "domain=${{ secrets.PROD_DOMAIN || 'formuljar.maslick.ru' }}" >> $GITHUB_ENV
+          echo "domain=${{ secrets.PROD_DOMAIN_TEST || 'formuljar-test.maslick.ru' }}" >> $GITHUB_ENV
       - name: Deploy to S3 and invalidate cache
         env:
-          API_URL: ${{ secrets.API_URL || 'https://formuljar-api.maslick.ru' }}
-          CAPTCHA_PUBLIC: ${{ secrets.CAPTCHA_PUBLIC }}
-          CLOUFRONT_ID: ${{ secrets.CLOUFRONT_ID }}
-          S3_BUCKET: ${{ secrets.S3_BUCKET || 'formuljar-dev' }}
+          API_URL: ${{ secrets.API_URL_TEST || 'https://formuljar-api.maslick.ru' }}
+          CAPTCHA_PUBLIC: ${{ secrets.CAPTCHA_PUBLIC_TEST }}
+          CLOUFRONT_ID: ${{ secrets.CLOUFRONT_ID_TEST }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET_TEST || 'formuljar-test' }}
         run: ./s3-sync.sh
       - name: Update deployment status
         uses: bobheadxi/deployments@v0.4.2

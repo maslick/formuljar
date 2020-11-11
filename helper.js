@@ -1,29 +1,7 @@
 const axios = require('axios');
 const config = require("./config");
-const fs = require('fs');
-const path = require('path');
 const {addEntry} = require('./sheets');
 
-async function formHandler(req, res) {
-  const captcha = req.body["g-recaptcha-response"];
-  const result = await verifyCaptchaToken(captcha);
-  const name = req.body["name"];
-  console.log(`captcha: ${result}`);
-  if (!result) res.send(errorHtml());
-  else {
-    res.send(successHtml(name));
-
-    const message = {
-      name: req.body.name,
-      email: req.body.email,
-      phone: req.body.phone,
-      message: req.body.message
-    };
-
-    await sendTelegramMessage(message);
-    await sendMessageToSheets(message);
-  }
-}
 
 async function verifyCaptchaToken(token) {
   try {
@@ -75,17 +53,6 @@ async function sendMessageToSheets(message) {
   await addEntry({spreadsheetId, sheetName, data});
 }
 
-function successHtml(name) {
-  let success = fs.readFileSync(path.join(__dirname + '/templates/success.html'), 'utf8');
-  success = success.replace("%NAME%", name);
-  return success.replace("%HOME_URL%", config.HOME_URL);
-}
-
-function errorHtml() {
-  let error = fs.readFileSync(path.join(__dirname + '/templates/error.html'), 'utf8');
-  return error.replace("%HOME_URL%", config.HOME_URL);
-}
-
 function currentTime() {
   let now = new Date();
 
@@ -116,10 +83,7 @@ function currentTime() {
 }
 
 module.exports = {
-  formHandler,
   verifyCaptchaToken,
   sendTelegramMessage,
   sendMessageToSheets,
-  successHtml,
-  errorHtml,
 };

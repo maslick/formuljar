@@ -1,16 +1,13 @@
 // API_URL: %API_URL%
 // PUBLIC_KEY: %PUBLIC_KEY%
 
-function onSubmit(token) {
-  document.getElementById("demo-form").submit();
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-  const name = randomName();
-  document.getElementById("name").value = name;
-  document.getElementById("email").value = randomEmail(name);
-  document.getElementById("phone").value = randomPhone();
-  document.getElementById("message").value = randomFromArray(DATA.message);
+  randomizeForm();
+  document.getElementById("reset").onclick = ev => {
+    onReset(ev);
+    randomizeForm();
+    clearStatus();
+  }
 }, false);
 
 const DATA = {
@@ -39,6 +36,83 @@ const DATA = {
   ]
 };
 
+function onSubmit(e) {
+  e.preventDefault();
+  clearStatus();
+  grecaptcha.ready(async () => {
+    const token = await grecaptcha.execute('%PUBLIC_KEY%', {action: 'submit'});
+    console.log(`token: ${token}`);
+    const parsed = parseForm();
+
+    try {
+      hideForm();
+      let payload = {
+        name: parsed.name,
+        email: parsed.email,
+        phone: parsed.phone,
+        message: parsed.message,
+        "g-recaptcha-response": token
+      };
+      let response = await fetch('%API_URL%/form', {
+        method: 'POST',
+        headers: {
+          'Accept': "application/json",
+          'Content-Type': "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      let js = await response.json();
+      let status = response.status;
+      if (status === 200){
+        document.getElementById("status").innerHTML = `
+          <div style="padding: 20px 0">
+            Hi <b>${js.name}!</b><br>Thank you for your request,<br>we will contact you shortly...
+          </div>
+          <p>
+            <a href='/' class="button">Back to main page</a>
+          </p>
+        `;
+      } else {
+        document.getElementById("status").innerHTML = `
+          <div style="padding: 20px 0">
+            ${js.message}
+          </div>
+          <p>
+            <a href='/' class="button">Try again</a>
+          </p>`;
+      }
+    } catch (e) {
+      document.getElementById("status").innerHTML = e.toString();
+    }
+  });
+}
+
+function onReset(e) {
+  e.preventDefault();
+  randomizeForm();
+}
+
+function randomizeForm() {
+  const name = randomName();
+  document.getElementById("name").value = name;
+  document.getElementById("email").value = randomEmail(name);
+  document.getElementById("phone").value = randomPhone();
+  document.getElementById("message").value = randomFromArray(DATA.message);
+}
+
+function parseForm() {
+  const name = document.getElementById("name").value || "Jacky Chan";
+  const email = document.getElementById("email").value || "jacky.chan@gmail.com";
+  const phone = document.getElementById("phone").value || "+1234567890";
+  const message = document.getElementById("message").value || "hello world!";
+  return {name, email, phone, message};
+}
+
+function clearStatus() {
+  document.getElementById("status").innerText = "";
+}
+
 function randomFromArray(items) {
   return items[Math.floor(Math.random() * items.length)];
 }
@@ -55,4 +129,8 @@ function randomEmail(name) {
 
 function randomPhone() {
   return `+386${Math.floor(Math.random() * 1000000000)}`.substring(0,12);
+}
+
+function hideForm() {
+  document.getElementById("demo-form").hidden = true;
 }

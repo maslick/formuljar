@@ -16,7 +16,7 @@
     </div>
 
     <div id="main">
-      <form action="%API_URL%/form" method="post" id="demo-form">
+      <form method="post" id="demo-form" onsubmit="return onSubmit(event)">
         <fieldset>
           <!-- Name -->
           <div>
@@ -47,19 +47,18 @@
           </div>
 
           <div>
-            <button type="submit"
-                    class="g-recaptcha"
-                    data-sitekey="%PUBLIC_KEY%"
-                    data-callback='onSubmit'
-                    data-action='submit'>SUBMIT</button>
+            <button id="submit" type="submit">SUBMIT</button>
+          </div>
+          <div>
+            <button id="reset">RESET</button>
           </div>
         </fieldset>
-
       </form>
+      <div id="status"></div>
     </div>
   </div>
 </body>
 
-<script src="https://www.google.com/recaptcha/api.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=%PUBLIC_KEY%"></script>
 <script src="app.js"></script>
 </html>
