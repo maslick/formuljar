@@ -15,7 +15,7 @@ The integration part with 3rd party services is pretty much straightforward. How
 An attacker :male_detective: (e.g. your competitor) may get the form handler URL and issue a number of dummy ``POST`` requests, thus making your backend send a lot of notifications and polluting your spreadsheet with fake data.
 Here we can use **reCaptcha** to process only the requests produced by a human.
 
-### :two: You may need to process requests asynchronously :ping_pong: and respond to the user immediately :running:
+### :two: You may need to process requests asynchronously :ping_pong: and respond immediately! :running:
 You don't want your user to wait!
 Integration with 3rd party services such as Telegram, Spreadsheets, etc. may take some time, so you need to decouple the web request and business logic by using a message queue (e.g. AWS SQS).
 
