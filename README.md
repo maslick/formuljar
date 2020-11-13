@@ -29,4 +29,4 @@ Hosting on Heroku for $7/month is a good option, but it doesn't scale well. Bett
 * Google reCaptcha v3 (server-side verification) :boxing_glove:
 * Integration with Telegram (notifications) :bookmark:
 * Integration with Google Spreadsheets (audit) :floppy_disk:
-* Serverless framework on AWS: API GW, Lambda, S3, Cloudfront, SQS :heart:
+* Serverless framework on AWS: API GW, SQS, Lambda, S3, Cloudfront :heart:
