@@ -26,7 +26,7 @@ You could host your app on Heroku. There are 2 options here: a free plan (limite
 Hosting on Heroku for $7/month is a good option, but it doesn't scale well. Better use Serverless on AWS with almost infinite scaling capabilities.
 
 ## Features
-1. Google reCaptcha v3 (server-side verification) :boxing_glove:
-2. Integration with Telegram (notifications) :bookmark:
-3. Integration with Google Spreadsheets (audit) :cd:
-4. Serverless framework on AWS: API GW, Lambda, S3, Cloudfront, SQS :heart:
+* Google reCaptcha v3 (server-side verification) :boxing_glove:
+* Integration with Telegram (notifications) :bookmark:
+* Integration with Google Spreadsheets (audit) :cd:
+* Serverless framework on AWS: API GW, Lambda, S3, Cloudfront, SQS :heart:
