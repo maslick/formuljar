@@ -20,11 +20,13 @@ You don't want your user to wait!
 Integration with 3rd party services such as Telegram, Spreadsheets, etc. may take some time, so you need to decouple the web request and business logic by using a message queue (e.g. AWS SQS).
 
 ### :three: Your solution should be cheap! :euro: :moneybag: :money_with_wings:
+You could host your app on Heroku. There are 2 options here: a free plan (limited availability, no custom domain, no TLS) or a Hobby plan ($7 per dyno per month). However, there is a better hosting solution which is almost free, and that is - AWS :ok_hand:
 
-You could host your app on Heroku (free or $7). However, there is a better hosting solution and that is - AWS :ok_hand:
+### :four: Your solution should scale well :satellite:
+Hosting on Heroku for $7/month is a good option, but it doesn't scale well. Better use Serverless on AWS with almost infinite scaling capabilities.
 
 ## Features
 1. Google reCaptcha v3 (server-side verification) :boxing_glove:
 2. Integration with Telegram (notifications) :bookmark:
 3. Integration with Google Spreadsheets (audit) :cd:
-4. Serverless framework with AWS: API GW, Lambda, S3, Cloudfront, SQS :heart:
+4. Serverless framework on AWS: API GW, Lambda, S3, Cloudfront, SQS :heart:
