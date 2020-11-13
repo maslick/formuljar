@@ -23,7 +23,7 @@ Integration with 3rd party services such as Telegram, Spreadsheets, etc. may tak
 You could host your app on Heroku (free or $7). However, there is a better hosting solution and that is - AWS :ok_hand:
 
 ## Features
-1. Google reCaptcha v3 (server-side verification)
-2. Integration with Telegram (notifications)
-3. Integration with Google Spreadsheets (audit)
+1. Google reCaptcha v3 (server-side verification) :boxing_glove:
+2. Integration with Telegram (notifications) :bookmark:
+3. Integration with Google Spreadsheets (audit) :cd:
 4. Serverless framework with AWS: API GW, Lambda, S3, Cloudfront, SQS :heart:
