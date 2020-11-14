@@ -43,7 +43,7 @@ You could host your app on Heroku. There are 2 options here: a free plan (limite
 2. Go over to Settings and copy both ``CAPTCHA_PUBLIC`` and ``CAPTCHA_SECRET``.
 3. Add necessary domains where you want to use reCaptcha (e.g. ``d2dc90ktgsfnzk.cloudfront.net``, ``localhost``, ``formuljar.maslick.ru``).
 
-### :diamonds: Telegram 
+### :hearts: Telegram 
 1. Send a new message to @BotFather: ``/newbot``. 
 2. Give your bot a name (e.g. ``Formuljar``). 
 3. Choose a username for your bot (e.g. ``formuljar_bot``). 
