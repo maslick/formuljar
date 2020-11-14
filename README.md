@@ -4,6 +4,13 @@ a simple web form with extra security
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
+<img src="formuljar-aws.png">
+
+## Features
+* Google reCaptcha v3 (server-side verification) :boxing_glove:
+* Integration with Telegram (notifications) :bookmark:
+* Integration with Google Spreadsheets (audit) :floppy_disk:
+* Serverless framework on AWS: API GW, SQS, Lambda, S3, Cloudfront :heart:
 
 ## Motivation
 Often times businesses need a simple static web form to get user feedback and/or generate sales leads, so that users
@@ -27,11 +34,6 @@ You could host your app on Heroku. There are 2 options here: a free plan (limite
 ### :four: Your solution should scale well :satellite:
 Hosting on Heroku for $7/month is a good option, but it doesn't scale well. Better use Serverless on AWS with almost infinite scaling capabilities.
 
-## Features
-* Google reCaptcha v3 (server-side verification) :boxing_glove:
-* Integration with Telegram (notifications) :bookmark:
-* Integration with Google Spreadsheets (audit) :floppy_disk:
-* Serverless framework on AWS: API GW, SQS, Lambda, S3, Cloudfront :heart:
 
 ## Installation
 ### reCaptcha
