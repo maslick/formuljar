@@ -50,4 +50,11 @@ Hosting on Heroku for $7/month is a good option, but it doesn't scale well. Bett
 8. Write a sample message into your channel and forward it to ``@getidsbot``. 
 9. Switch to @getidsbot and find your ``TELEGRAM_CHAT_ID`` (Origin chat -> id): e.g. ``-1001375717457``.
 
-`
+### Google Spreadsheets
+1. Log in to GCP console https://console.cloud.google.com/
+2. Create a new project.
+3. Enable ``Google Sheets API``.
+4. Click Manage and head over to Credentials. Create a new service account.
+5. Create a new API key. Download the JSON. This will be your ``GOOGLE_CREDENTIALS`` env. variable.
+6. Create a new Spreadsheet and Share the document with your service account email.
+7. Get the id of your document (e.g. https://docs.google.com/spreadsheets/d/1JnW6kWGL-Xily71-xxxxxx-Bw_lfW2Lb_SyCjx3uBTyQ -> ``1JnW6kWGL-Xily71-xxxxxx-Bw_lfW2Lb_SyCjx3uBTyQ``). This will be your ``SPREADSHEETS_ID`` env. variable.
