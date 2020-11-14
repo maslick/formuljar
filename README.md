@@ -6,13 +6,13 @@ a simple web form with extra security
 
 <img src="formuljar-aws.png">
 
-## Features
+## :white_check_mark: Features
 * Google reCaptcha v3 (server-side verification) :boxing_glove:
 * Integration with Telegram (notifications) :bookmark:
 * Integration with Google Spreadsheets (audit) :floppy_disk:
 * Serverless framework on AWS: API GW, SQS, Lambda, S3, Cloudfront :heart:
 
-## Motivation
+## :bulb: Motivation
 Often times businesses need a simple static web form to get user feedback and/or generate sales leads, so that users
 fill out a web form with their contact data.
 The business then needs to get a notification (e.g. via Telegram) and store user info in a document (e.g. Google Spreadsheets).
@@ -35,13 +35,13 @@ You could host your app on Heroku. There are 2 options here: a free plan (limite
 Hosting on Heroku for $7/month is a good option, but it doesn't scale well. Better use Serverless on AWS with almost infinite scaling capabilities.
 
 
-## Installation
+## :rocket: Installation
 ### reCaptcha
 1. Go to https://www.google.com/recaptcha/admin and create a new site.
 2. Go over to Settings and copy both ``SITE_KEY`` and ``SECRET_KEY``.
 3. Add necessary domains where you want to use reCaptcha (e.g. ``d2dc90ktgsfnzk.cloudfront.net``, ``localhost``, ``formuljar.maslick.ru``).
 
-### Telegram
+### Telegram 
 1. Create a new message to @BotFather: ``/newbot``. 
 2. Give it a name (e.g. ``Formuljar``). 
 3. Choose a username for your bot (e.g. ``formuljar_bot``). 
