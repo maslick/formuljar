@@ -128,3 +128,10 @@ fieldset {
         border-top: 1px solid #dee2e6;
     }
 }
+
+#loader {
+    margin: 0 auto;
+    text-align: center;
+    width: 30px;
+    display: none;
+}
