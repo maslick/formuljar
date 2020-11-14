@@ -4,7 +4,7 @@ a simple web form with extra security
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-## :white_check_mark: Features
+## :rocket: Features
 * Google reCaptcha v3 (server-side verification) :boxing_glove:
 * Integration with Telegram (notifications) :bookmark:
 * Integration with Google Spreadsheets (audit) :floppy_disk:
@@ -35,19 +35,19 @@ You could host your app on Heroku. There are 2 options here: a free plan (limite
 Hosting on Heroku for $7/month is a good option, but it doesn't scale well. Better use Serverless on AWS with almost infinite scaling capabilities.
 
 
-## :rocket: Installation
+## :white_check_mark: Installation
 ### reCaptcha
 1. Go to https://www.google.com/recaptcha/admin and create a new site.
-2. Go over to Settings and copy both ``SITE_KEY`` and ``SECRET_KEY``.
+2. Go over to Settings and copy both ``CAPTCHA_PUBLIC`` and ``CAPTCHA_SECRET``.
 3. Add necessary domains where you want to use reCaptcha (e.g. ``d2dc90ktgsfnzk.cloudfront.net``, ``localhost``, ``formuljar.maslick.ru``).
 
 ### Telegram 
-1. Create a new message to @BotFather: ``/newbot``. 
-2. Give it a name (e.g. ``Formuljar``). 
+1. Send a new message to @BotFather: ``/newbot``. 
+2. Give your bot a name (e.g. ``Formuljar``). 
 3. Choose a username for your bot (e.g. ``formuljar_bot``). 
 4. You will get a ``TELEGRAM_BOT_TOKEN`` (e.g. ``1234567890:ABCdefgHijklmnoPQrsTUVwXyZ``).
-5. You can also set a profile photo by issuing ``/setuserpic``. 
-6. Create a channel. Set its type to private and invite your bot (e.g. ``formuljar_bot``) as admin 👩‍💼 with the ability to post messages. 
+5. You can also set a profile pic by issuing ``/setuserpic``. 
+6. Create a channel. Set its type to private and invite your bot (e.g. ``@formuljar_bot``) as admin 👩‍💼 with the ability to post messages. 
 7. Start a conversation with ``@getidsbot``. 
 8. Write a sample message into your channel and forward it to ``@getidsbot``. 
 9. Switch to @getidsbot and find your ``TELEGRAM_CHAT_ID`` (Origin chat -> id): e.g. ``-1001375717457``.
@@ -57,6 +57,6 @@ Hosting on Heroku for $7/month is a good option, but it doesn't scale well. Bett
 2. Create a new project.
 3. Enable ``Google Sheets API``.
 4. Click Manage and head over to Credentials. Create a new service account.
-5. Create a new API key. Download the JSON. This will be your ``GOOGLE_CREDENTIALS`` env. variable.
-6. Create a new Spreadsheet and Share the document with your service account email.
+5. Create a new API key. Download the JSON. Copy the JSON into the ``GOOGLE_CREDENTIALS`` env. variable.
+6. Create a new Spreadsheet and Share the document with your service account email (see JSON -> ``client_email``).
 7. Get the id of your document (e.g. https://docs.google.com/spreadsheets/d/1JnW6kWGL-Xily71-xxxxxx-Bw_lfW2Lb_SyCjx3uBTyQ -> ``1JnW6kWGL-Xily71-xxxxxx-Bw_lfW2Lb_SyCjx3uBTyQ``). This will be your ``SPREADSHEET_ID`` env. variable.
