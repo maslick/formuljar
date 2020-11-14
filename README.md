@@ -7,9 +7,9 @@ a simple web form with extra security
 
 ## :rocket: Features
 * Google reCaptcha v3 (server-side verification) :boxing_glove:
-* Integration with Telegram (notifications) :bookmark:
-* Integration with Google Spreadsheets (audit) :floppy_disk:
-* Serverless framework on AWS: API GW, SQS, Lambda, S3, Cloudfront :heart:
+* Integration with Telegram (notifications) :8ball:
+* Integration with Google Spreadsheets (audit) :jigsaw:
+* Serverless framework on AWS: API GW, Lambda, SQS, S3, Cloudfront :heart:
 
 <br><img src="formuljar-aws.png">
 
@@ -25,24 +25,25 @@ The integration part with 3rd party services is pretty much straightforward. How
 An attacker :male_detective: (e.g. your competitor) may get the form handler URL and issue a number of dummy ``POST`` requests, thus making your backend send a lot of notifications and polluting your spreadsheet with fake data.
 Here we can use **reCaptcha** to process only the requests produced by a human.
 
-### :two: You may need to process requests asynchronously :ping_pong: and respond immediately! :running:
+### :two: You may need to process requests asynchronously :ping_pong: and respond immediately! :horse_racing:
 You don't want your users to wait!
 Integration with 3rd party services such as Telegram, Spreadsheets, etc. may take some time, so you need to decouple the web request and business logic by using a message queue (e.g. AWS SQS).
 
-### :three: Your solution should be cheap! :euro: :moneybag: :money_with_wings:
+### :three: Your solution should scale well :satellite:
+Hosting on Heroku for $7/month is a good option, but it doesn't scale well. Better use Serverless on AWS with almost infinite scaling capabilities.
+
+### :four: Your solution should be cheap! :money_with_wings:
 You could host your app on Heroku. There are 2 options here: a free plan (limited availability, no custom domain, no TLS) or a Hobby plan ($7 per dyno per month). However, there is a better hosting solution which is almost free, and that is - AWS :ok_hand:
 
-### :four: Your solution should scale well :satellite:
-Hosting on Heroku for $7/month is a good option, but it doesn't scale well. Better use Serverless on AWS with almost infinite scaling capabilities.
 
 
 ## :white_check_mark: Installation
-### reCaptcha
+### :spades: reCaptcha
 1. Go to https://www.google.com/recaptcha/admin and create a new site.
 2. Go over to Settings and copy both ``CAPTCHA_PUBLIC`` and ``CAPTCHA_SECRET``.
 3. Add necessary domains where you want to use reCaptcha (e.g. ``d2dc90ktgsfnzk.cloudfront.net``, ``localhost``, ``formuljar.maslick.ru``).
 
-### Telegram 
+### :diamonds: Telegram 
 1. Send a new message to @BotFather: ``/newbot``. 
 2. Give your bot a name (e.g. ``Formuljar``). 
 3. Choose a username for your bot (e.g. ``formuljar_bot``). 
@@ -53,7 +54,7 @@ Hosting on Heroku for $7/month is a good option, but it doesn't scale well. Bett
 8. Write a sample message into your channel and forward it to ``@getidsbot``. 
 9. Switch to @getidsbot and find your ``TELEGRAM_CHAT_ID`` (Origin chat -> id): e.g. ``-1001375717457``.
 
-### Google Spreadsheets
+### :clubs: Google Spreadsheets
 1. Log in to GCP console https://console.cloud.google.com/
 2. Create a new project.
 3. Enable ``Google Sheets API``.
