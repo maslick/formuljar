@@ -4,13 +4,13 @@ a simple web form with extra security
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-<img src="formuljar-aws.png">
-
 ## :white_check_mark: Features
 * Google reCaptcha v3 (server-side verification) :boxing_glove:
 * Integration with Telegram (notifications) :bookmark:
 * Integration with Google Spreadsheets (audit) :floppy_disk:
 * Serverless framework on AWS: API GW, SQS, Lambda, S3, Cloudfront :heart:
+
+<img src="formuljar-aws.png">
 
 ## :bulb: Motivation
 Often times businesses need a simple static web form to get user feedback and/or generate sales leads, so that users
