@@ -1,9 +1,9 @@
 # =formuljar=
 
-a simple web form with extra security
-
 [![PROD-ENV-DEPLOYMENT](https://github.com/maslick/formuljar/workflows/PROD-ENV-DEPLOYMENT/badge.svg)](https://github.com/maslick/formuljar/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
+a simple web form with extra security
 
 ## :rocket: Features
 * Google reCaptcha v3 (server-side verification) :boxing_glove:
