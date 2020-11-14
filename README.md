@@ -10,7 +10,7 @@ a simple web form with extra security
 * Integration with Google Spreadsheets (audit) :floppy_disk:
 * Serverless framework on AWS: API GW, SQS, Lambda, S3, Cloudfront :heart:
 
-<img src="formuljar-aws.png">
+<br><img src="formuljar-aws.png">
 
 ## :bulb: Motivation
 Often times businesses need a simple static web form to get user feedback and/or generate sales leads, so that users
