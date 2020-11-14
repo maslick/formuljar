@@ -1,11 +1,10 @@
+const PORT = process.env.PORT || 3000;
+
 const CAPTCHA_PUBLIC = process.env.CAPTCHA_PUBLIC || "6LeqCNkZAAAAAMeqnJ7R2UMdUADc8bdClUOOXDFo";
 const CAPTCHA_SECRET = process.env.CAPTCHA_SECRET || "6LeqCNkZAAAAAPv_lhQTbsA1sH6vI3ovFgVojoaF";
 
 const TELEGRAM_CHAT_ID = process.env.CHAT_ID || "-1001355312960"; // formuljar channel
 const TELEGRAM_BOT_TOKEN = process.env.BOT_TOKEN || "1318860812:AAHRlDHw4hzLKq382OnhCSOVxKxGKB1lMY4";
-
-// const chatId = process.env.CHAT_ID || "73317272";    // formuljar bot (Pavel Maslov)
-// const chatId = process.env.CHAT_ID || "-445121005";  // formuljar group
 
 const GOOGLE_CREDENTIALS = process.env.GOOGLE_CREDENTIALS || `{
   "type": "service_account",
@@ -18,12 +17,14 @@ const GOOGLE_CREDENTIALS = process.env.GOOGLE_CREDENTIALS || `{
   "token_uri": "https://oauth2.googleapis.com/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/formuljar-service-account%40formuljar-1604230016895.iam.gserviceaccount.com"
-}`
+}`;
 
-const HOME_URL = process.env.HOME_URL || '';
-
-const PORT = process.env.PORT || 3000;
+const SPREADSHEET_ID = process.env.SPREADSHEET_ID || "1jrUOrCJtJ-L46P0VjMjN9QK8NPMyU3vGUerGgEacsaE";
+const SHEET_NAME = process.env.SHEET_NAME || "Sheet1";
 
 module.exports = {
-  CAPTCHA_PUBLIC, CAPTCHA_SECRET, TELEGRAM_CHAT_ID, TELEGRAM_BOT_TOKEN, GOOGLE_CREDENTIALS, HOME_URL, PORT
-}
+  PORT,
+  CAPTCHA_PUBLIC, CAPTCHA_SECRET,
+  TELEGRAM_CHAT_ID, TELEGRAM_BOT_TOKEN,
+  GOOGLE_CREDENTIALS, SPREADSHEET_ID, SHEET_NAME
+};

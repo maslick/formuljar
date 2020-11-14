@@ -57,4 +57,4 @@ Hosting on Heroku for $7/month is a good option, but it doesn't scale well. Bett
 4. Click Manage and head over to Credentials. Create a new service account.
 5. Create a new API key. Download the JSON. This will be your ``GOOGLE_CREDENTIALS`` env. variable.
 6. Create a new Spreadsheet and Share the document with your service account email.
-7. Get the id of your document (e.g. https://docs.google.com/spreadsheets/d/1JnW6kWGL-Xily71-xxxxxx-Bw_lfW2Lb_SyCjx3uBTyQ -> ``1JnW6kWGL-Xily71-xxxxxx-Bw_lfW2Lb_SyCjx3uBTyQ``). This will be your ``SPREADSHEETS_ID`` env. variable.
+7. Get the id of your document (e.g. https://docs.google.com/spreadsheets/d/1JnW6kWGL-Xily71-xxxxxx-Bw_lfW2Lb_SyCjx3uBTyQ -> ``1JnW6kWGL-Xily71-xxxxxx-Bw_lfW2Lb_SyCjx3uBTyQ``). This will be your ``SPREADSHEET_ID`` env. variable.
