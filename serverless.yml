@@ -24,7 +24,8 @@ custom:
     TELEGRAM_CHAT_ID: ${env:TELEGRAM_CHAT_ID}
     TELEGRAM_BOT_TOKEN: ${env:TELEGRAM_BOT_TOKEN}
     GOOGLE_CREDENTIALS: ${env:GOOGLE_CREDENTIALS}
-    HOME_URL: "https://formuljar.maslick.ru"
+    SPREADSHEET_ID: ${env:SPREADSHEET_ID}
+    SHEET_NAME: ${env:SHEET_NAME}
     QUEUE_URL: !Ref FormuljarQueue
   test:
     ui_cert: ${opt:ui_cert, "arn:aws:acm:us-east-1:409637905256:certificate/789b2858-bf9d-4be8-8e33-61a10efbf25e"}
@@ -35,7 +36,8 @@ custom:
     TELEGRAM_CHAT_ID: ${env:TELEGRAM_CHAT_ID}
     TELEGRAM_BOT_TOKEN: ${env:TELEGRAM_BOT_TOKEN}
     GOOGLE_CREDENTIALS: ${env:GOOGLE_CREDENTIALS}
-    HOME_URL: "https://formuljar-test.maslick.ru"
+    SPREADSHEET_ID: ${env:SPREADSHEET_ID}
+    SHEET_NAME: ${env:SHEET_NAME}
     QUEUE_URL: !Ref FormuljarQueue
 
 provider:
@@ -63,7 +65,8 @@ provider:
     TELEGRAM_CHAT_ID: ${self:custom.${self:provider.stage}.TELEGRAM_CHAT_ID}
     TELEGRAM_BOT_TOKEN: ${self:custom.${self:provider.stage}.TELEGRAM_BOT_TOKEN}
     GOOGLE_CREDENTIALS: ${self:custom.${self:provider.stage}.GOOGLE_CREDENTIALS}
-    HOME_URL: ${self:custom.${self:provider.stage}.HOME_URL}
+    SPREADSHEET_ID: ${self:custom.${self:provider.stage}.SPREADSHEET_ID}
+    SHEET_NAME: ${self:custom.${self:provider.stage}.SHEET_NAME}
     QUEUE_URL: ${self:custom.${self:provider.stage}.QUEUE_URL}
 
 functions:

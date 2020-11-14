@@ -46,8 +46,8 @@ function composeMessage(message) {
 }
 
 async function sendMessageToSheets(message) {
-  const spreadsheetId = "1jrUOrCJtJ-L46P0VjMjN9QK8NPMyU3vGUerGgEacsaE";
-  const sheetName = "Sheet1";
+  const spreadsheetId = config.SPREADSHEET_ID;
+  const sheetName = config.SHEET_NAME;
 
   const data = [message.name, message.email, message.phone, message.message, currentTime()];
   await addEntry({spreadsheetId, sheetName, data});
