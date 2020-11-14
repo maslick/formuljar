@@ -40,7 +40,14 @@ Hosting on Heroku for $7/month is a good option, but it doesn't scale well. Bett
 3. Add necessary domains where you want to use reCaptcha (e.g. ``d2dc90ktgsfnzk.cloudfront.net``, ``localhost``, ``formuljar.maslick.ru``).
 
 ### Telegram
-1. Create a new message to @BotFather: ``/newbot``. Give it a name (e.g. ``Formuljar``). Choose a username for your bot (e.g. ``formuljar_bot``). You can also set a profile photo by issuing ``/setuserpic``. You will get a ``TELEGRAM_BOT_TOKEN`` (e.g. ``1234567890:ABCdefgHijklmnoPQrsTUVwXyZ``)
-2. Create a channel. Set its type to private and invite your bot (e.g. ``formuljar_bot``) as admin 👩‍💼 with the ability to post messages. Start a conversation with ``@getidsbot``. Write a sample message into your channel and forward it to ``@getidsbot``. Switch to @getidsbot and find your ``TELEGRAM_CHAT_ID`` (Origin chat -> id): e.g. ``-1001375717457``.
+1. Create a new message to @BotFather: ``/newbot``. 
+2. Give it a name (e.g. ``Formuljar``). 
+3. Choose a username for your bot (e.g. ``formuljar_bot``). 
+4. You will get a ``TELEGRAM_BOT_TOKEN`` (e.g. ``1234567890:ABCdefgHijklmnoPQrsTUVwXyZ``).
+5. You can also set a profile photo by issuing ``/setuserpic``. 
+6. Create a channel. Set its type to private and invite your bot (e.g. ``formuljar_bot``) as admin 👩‍💼 with the ability to post messages. 
+7. Start a conversation with ``@getidsbot``. 
+8. Write a sample message into your channel and forward it to ``@getidsbot``. 
+9. Switch to @getidsbot and find your ``TELEGRAM_CHAT_ID`` (Origin chat -> id): e.g. ``-1001375717457``.
 
 `
