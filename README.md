@@ -2,6 +2,8 @@
 
 a simple web form with extra security
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
 
 ## Motivation
 Often times businesses need a simple static web form to get user feedback and/or generate sales leads, so that users
