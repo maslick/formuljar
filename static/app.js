@@ -46,6 +46,7 @@ function onSubmit(e) {
 
     try {
       hideForm();
+      showSpinner();
       let payload = {
         name: parsed.name,
         email: parsed.email,
@@ -64,8 +65,9 @@ function onSubmit(e) {
 
       let js = await response.json();
       let status = response.status;
+      hideSpinner();
       if (status === 200){
-        document.getElementById("status").innerHTML = `
+        document.getElementById("status_text").innerHTML = `
           <div style="padding: 20px 0">
             Hi <b>${js.name}!</b><br>Thank you for your request,<br>we will contact you shortly...
           </div>
@@ -74,7 +76,7 @@ function onSubmit(e) {
           </p>
         `;
       } else {
-        document.getElementById("status").innerHTML = `
+        document.getElementById("status_text").innerHTML = `
           <div style="padding: 20px 0">
             ${js.message}
           </div>
@@ -83,7 +85,8 @@ function onSubmit(e) {
           </p>`;
       }
     } catch (e) {
-      document.getElementById("status").innerHTML = e.toString();
+      document.getElementById("status_text").innerHTML = e.toString();
+      hideSpinner();
     }
   });
 }
@@ -110,7 +113,15 @@ function parseForm() {
 }
 
 function clearStatus() {
-  document.getElementById("status").innerText = "";
+  document.getElementById("status_text").innerText = "";
+}
+
+function showSpinner() {
+  document.getElementById("loader").style.display = "block";
+}
+
+function hideSpinner() {
+  document.getElementById("loader").style.display = "none";
 }
 
 function randomFromArray(items) {
