@@ -51,6 +51,7 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID_TEST }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN_TEST }}
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS_TEST }}
+          SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID_TEST }}
         run: |
           npm run deploy-test
       - name: Set domain
