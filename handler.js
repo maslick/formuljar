@@ -28,7 +28,8 @@ module.exports.form = async (event) => {
     name: body.name,
     email: body.email,
     phone: body.phone,
-    message: body.message
+    message: body.message,
+    affiliateId: body.affiliateId
   };
 
   console.log("Queue url: " + process.env.QUEUE_URL);

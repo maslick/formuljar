@@ -52,6 +52,7 @@ function onSubmit(e) {
         email: parsed.email,
         phone: parsed.phone,
         message: parsed.message,
+        affiliateId: getParameterByName("aff") || "",
         "g-recaptcha-response": token
       };
       let response = await fetch('%API_URL%/form', {
@@ -144,4 +145,13 @@ function randomPhone() {
 
 function hideForm() {
   document.getElementById("demo-form").hidden = true;
+}
+
+function getParameterByName(name, url = window.location.href) {
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+    results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }

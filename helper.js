@@ -42,14 +42,15 @@ function composeMessage(message) {
   return `*From:* ${message.name}
 *Email:* ${message.email}
 *Phone:* ${message.phone}
-*Message:* ${message.message}`;
+*Message:* ${message.message}
+*Affiliate:* ${message.affiliateId}`;
 }
 
 async function sendMessageToSheets(message) {
   const spreadsheetId = config.SPREADSHEET_ID;
   const sheetName = config.SHEET_NAME;
 
-  const data = [message.name, message.email, message.phone, message.message, currentTime()];
+  const data = [message.name, message.email, message.phone, message.message, currentTime(), message.affiliateId];
   await addEntry({spreadsheetId, sheetName, data});
 }
 
