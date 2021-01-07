@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     onReset(ev);
     randomizeForm();
     clearStatus();
+    addAffiliateId();
   }
 }, false);
 
@@ -103,7 +104,6 @@ function randomizeForm() {
   document.getElementById("email").value = randomEmail(name);
   document.getElementById("phone").value = randomPhone();
   document.getElementById("message").value = randomFromArray(DATA.message);
-  addAffiliateId();
 }
 
 function addAffiliateId() {
