@@ -103,6 +103,15 @@ function randomizeForm() {
   document.getElementById("email").value = randomEmail(name);
   document.getElementById("phone").value = randomPhone();
   document.getElementById("message").value = randomFromArray(DATA.message);
+  addAffiliateId();
+}
+
+function addAffiliateId() {
+  if (history.pushState) {
+    const affiliateId = randomString(5, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + `?aff=${affiliateId}`;
+    window.history.pushState({path: newUrl}, '', newUrl);
+  }
 }
 
 function parseForm() {
@@ -149,9 +158,15 @@ function hideForm() {
 
 function getParameterByName(name, url = window.location.href) {
   name = name.replace(/[\[\]]/g, '\\$&');
-  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+  const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
     results = regex.exec(url);
   if (!results) return null;
   if (!results[2]) return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+function randomString(length, chars) {
+  let result = '';
+  for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+  return result;
 }
