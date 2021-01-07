@@ -39,11 +39,13 @@ async function sendTelegramMessage(message) {
 }
 
 function composeMessage(message) {
-  return `*From:* ${message.name}
+  let ret = `*From:* ${message.name}
 *Email:* ${message.email}
 *Phone:* ${message.phone}
-*Message:* ${message.message}
-*Affiliate:* ${message.affiliateId}`;
+*Message:* ${message.message}`;
+
+  if (message.affiliateId) ret += `\n*Affiliate:* ${message.affiliateId}`;
+  return ret;
 }
 
 async function sendMessageToSheets(message) {
