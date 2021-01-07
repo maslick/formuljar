@@ -108,7 +108,7 @@ function randomizeForm() {
 
 function addAffiliateId() {
   if (history.pushState) {
-    const affiliateId = randomString(5, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    const affiliateId = randomString(16, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
     const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + `?aff=${affiliateId}`;
     window.history.pushState({path: newUrl}, '', newUrl);
   }
