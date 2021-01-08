@@ -1,6 +1,7 @@
 # =formuljar=
 
-[![PROD-ENV-DEPLOYMENT](https://github.com/maslick/formuljar/workflows/PROD-ENV-DEPLOYMENT/badge.svg)](https://github.com/maslick/formuljar/actions)
+[![PROD-ENV-DEPLOYMENT](https://github.com/maslick/formuljar/workflows/PROD-ENV-DEPLOYMENT/badge.svg)](https://github.com/maslick/formuljar/actions?query=workflow%3APROD-ENV-DEPLOYMENT)
+[![TEST-ENV-DEPLOYMENT](https://github.com/maslick/formuljar/workflows/TEST-ENV-DEPLOYMENT/badge.svg)](https://github.com/maslick/formuljar/actions?query=workflow%3ATEST-ENV-DEPLOYMENT)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 a simple web form with extra security
