@@ -9,6 +9,8 @@ a simple web form with extra security
 * Google reCaptcha v3 (server-side verification) :boxing_glove:
 * Integration with Telegram (notifications) :8ball:
 * Integration with Google Spreadsheets (audit) :jigsaw:
+* Integration with your CRM (coming soon...) :chart:
+* Support for referral/affiliate links :money_mouth_face:
 * Serverless framework on AWS: API GW, Lambda, SQS, S3, Cloudfront :heart:
 
 <br><img src="formuljar-aws.png">
@@ -18,9 +20,9 @@ a simple web form with extra security
 * Test: https://formuljar-test.maslick.ru
 
 ## :bulb: Motivation
-Often times businesses need a simple static web form to get user feedback and/or generate sales leads, so that users
+Often times businesses need a simple static web form to get user feedback and/or generate sales leads, so that customers
 fill out a web form with their contact data.
-The business then needs to get a notification (e.g. via Telegram) and store user info in a document (e.g. Google Spreadsheets).
+The business then needs to get a notification (e.g. via Telegram) and store customer info in a document (e.g. Google Spreadsheets).
 
 The integration part with 3rd party services is pretty much straightforward. However, several **challenges** may arise:
 
@@ -47,15 +49,15 @@ You could host your app on Heroku. There are 2 options here: a free plan (limite
 2. Go over to Settings and copy both ``CAPTCHA_PUBLIC`` and ``CAPTCHA_SECRET``.
 3. Add necessary domains where you want to use reCaptcha (e.g. ``d2dc90ktgsfnzk.cloudfront.net``, ``localhost``, ``formuljar.maslick.ru``).
 
-### :hearts: Telegram 
-1. Send a new message to @BotFather: ``/newbot``. 
-2. Give your bot a name (e.g. ``Formuljar``). 
-3. Choose a username for your bot (e.g. ``formuljar_bot``). 
+### :hearts: Telegram
+1. Send a new message to @BotFather: ``/newbot``.
+2. Give your bot a name (e.g. ``Formuljar``).
+3. Choose a username for your bot (e.g. ``formuljar_bot``).
 4. You will get a ``TELEGRAM_BOT_TOKEN`` (e.g. ``1234567890:ABCdefgHijklmnoPQrsTUVwXyZ``).
-5. You can also set a profile pic by issuing ``/setuserpic``. 
-6. Create a channel. Set its type to private and invite your bot (e.g. ``@formuljar_bot``) as admin 👩‍💼 with the ability to post messages. 
-7. Start a conversation with ``@getidsbot``. 
-8. Write a sample message into your channel and forward it to ``@getidsbot``. 
+5. You can also set a profile pic by issuing ``/setuserpic``.
+6. Create a channel. Set its type to private and invite your bot (e.g. ``@formuljar_bot``) as admin 👩‍💼 with the ability to post messages.
+7. Start a conversation with ``@getidsbot``.
+8. Write a sample message into your channel and forward it to ``@getidsbot``.
 9. Switch to @getidsbot and find your ``TELEGRAM_CHAT_ID`` (Origin chat -> id): e.g. ``-1001375717457``.
 
 ### :clubs: Google Spreadsheets
