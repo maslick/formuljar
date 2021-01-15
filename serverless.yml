@@ -66,6 +66,7 @@ provider:
     shouldStartNameWithService: true
   httpApi:
     cors: true
+    payload: '1.0'
 
 functions:
   form:
