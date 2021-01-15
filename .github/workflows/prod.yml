@@ -52,7 +52,7 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
           SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
         run: |
-          sls deploy --stage dev --verbose
+          npx sls deploy --stage dev --verbose
       - name: Set domain
         run: |
           echo "domain=${{ secrets.PROD_DOMAIN || 'formuljar.maslick.ru' }}" >> $GITHUB_ENV
