@@ -68,6 +68,8 @@ provider:
     SPREADSHEET_ID: ${self:custom.${self:provider.stage}.SPREADSHEET_ID}
     SHEET_NAME: ${self:custom.${self:provider.stage}.SHEET_NAME}
     QUEUE_URL: ${self:custom.${self:provider.stage}.QUEUE_URL}
+  httpApi:
+    cors: true
 
 functions:
   form:
@@ -75,11 +77,9 @@ functions:
     memorySize: 128
     timeout: 5
     events:
-      - http:
+      - httpApi:
           path: /form
           method: post
-          cors:
-            origin: "*"
     warmup:
       enabled: true
 
