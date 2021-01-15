@@ -44,8 +44,6 @@ provider:
   name: aws
   runtime: nodejs12.x
   stage: ${opt:stage, 'dev'}
-  coreService: formuljar
-  accountId: ${opt:account, '409637905256'}
   region: eu-central-1
   iamRoleStatements:
     - Effect: Allow
@@ -68,6 +66,8 @@ provider:
     SPREADSHEET_ID: ${self:custom.${self:provider.stage}.SPREADSHEET_ID}
     SHEET_NAME: ${self:custom.${self:provider.stage}.SHEET_NAME}
     QUEUE_URL: ${self:custom.${self:provider.stage}.QUEUE_URL}
+  apiGateway:
+    shouldStartNameWithService: true
   httpApi:
     cors: true
 
