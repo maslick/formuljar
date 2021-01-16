@@ -28,10 +28,10 @@ jobs:
           cache-name: cache-node-modules
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-qa-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-prod-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-qa-${{ env.cache-name }}-
-            ${{ runner.os }}-qa-
+            ${{ runner.os }}-prod-${{ env.cache-name }}-
+            ${{ runner.os }}-prod-
             ${{ runner.os }}-
       - name: Install deps
         run: |
