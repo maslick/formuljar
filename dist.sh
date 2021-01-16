@@ -1,7 +1,7 @@
 #!/bin/bash
 
-: "${API_URL:="https://formuljar-api.maslick.ru"}"
-: "${CAPTCHA_PUBLIC:="6LeqCNkZAAAAAMeqnJ7R2UMdUADc8bdClUOOXDFo"}"
+: "${API_URL:="https://7qz8gruyy5.execute-api.eu-central-1.amazonaws.com"}"
+: "${CAPTCHA_PUBLIC:="6LfajOQZAAAAAPMckEiVO9u57fOEbc76r51UNWlX"}"
 
 function substitute() {
     input_file=$1
