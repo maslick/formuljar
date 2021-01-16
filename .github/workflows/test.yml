@@ -15,7 +15,7 @@ jobs:
       - uses: rlespinasse/github-slug-action@3.1.0
 
       - name: Start deployment
-        uses: bobheadxi/deployments@v0.4.2
+        uses: bobheadxi/deployments@v0.4.3
         id: deployment
         with:
           step: start
@@ -53,7 +53,7 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS_TEST }}
           SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID_TEST }}
         run: |
-          npm run deploy-test
+          npx sls deploy --stage test --verbose
       - name: Set domain
         run: |
           echo "domain=${{ secrets.PROD_DOMAIN_TEST || 'formuljar-test.maslick.ru' }}" >> $GITHUB_ENV
@@ -65,7 +65,7 @@ jobs:
           S3_BUCKET: ${{ secrets.S3_BUCKET_TEST || 'formuljar-test' }}
         run: ./s3-sync.sh
       - name: Update deployment status
-        uses: bobheadxi/deployments@v0.4.2
+        uses: bobheadxi/deployments@v0.4.3
         if: always()
         with:
           step: finish

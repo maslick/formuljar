@@ -3,16 +3,12 @@ frameworkVersion: '2'
 
 plugins:
   - serverless-offline
-  - serverless-api-gateway-throttling
   - serverless-plugin-warmup
 
 custom:
   serverless-offline:
     host: 0.0.0.0
     httpPort: 3003
-  apiGatewayThrottling:
-    maxRequestsPerSecond: 200
-    maxConcurrentRequests: 50
   warmup:
     prewarm: true
   dev:
@@ -44,8 +40,6 @@ provider:
   name: aws
   runtime: nodejs12.x
   stage: ${opt:stage, 'dev'}
-  coreService: formuljar
-  accountId: ${opt:account, '409637905256'}
   region: eu-central-1
   iamRoleStatements:
     - Effect: Allow
@@ -68,6 +62,11 @@ provider:
     SPREADSHEET_ID: ${self:custom.${self:provider.stage}.SPREADSHEET_ID}
     SHEET_NAME: ${self:custom.${self:provider.stage}.SHEET_NAME}
     QUEUE_URL: ${self:custom.${self:provider.stage}.QUEUE_URL}
+  apiGateway:
+    shouldStartNameWithService: true
+  httpApi:
+    cors: true
+    payload: '2.0'
 
 functions:
   form:
@@ -75,11 +74,9 @@ functions:
     memorySize: 128
     timeout: 5
     events:
-      - http:
+      - httpApi:
           path: /form
           method: post
-          cors:
-            origin: "*"
     warmup:
       enabled: true
 

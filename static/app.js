@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     onReset(ev);
     randomizeForm();
     clearStatus();
+    addAffiliateId();
   }
 }, false);
 
@@ -52,6 +53,7 @@ function onSubmit(e) {
         email: parsed.email,
         phone: parsed.phone,
         message: parsed.message,
+        affiliateId: getParameterByName("aff") || "",
         "g-recaptcha-response": token
       };
       let response = await fetch('%API_URL%/form', {
@@ -104,6 +106,14 @@ function randomizeForm() {
   document.getElementById("message").value = randomFromArray(DATA.message);
 }
 
+function addAffiliateId() {
+  if (history.pushState) {
+    const affiliateId = randomString(16, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + `?aff=${affiliateId}`;
+    window.history.pushState({path: newUrl}, '', newUrl);
+  }
+}
+
 function parseForm() {
   const name = document.getElementById("name").value || "Jacky Chan";
   const email = document.getElementById("email").value || "jacky.chan@gmail.com";
@@ -144,4 +154,19 @@ function randomPhone() {
 
 function hideForm() {
   document.getElementById("demo-form").hidden = true;
+}
+
+function getParameterByName(name, url = window.location.href) {
+  name = name.replace(/[\[\]]/g, '\\$&');
+  const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+    results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+function randomString(length, chars) {
+  let result = '';
+  for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+  return result;
 }
