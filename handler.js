@@ -9,6 +9,7 @@ module.exports.form = async (event) => {
     console.log('WarmUp - Lambda is warm!');
     return 'Lambda is warm!';
   }
+  console.log(event);
   const body = JSON.parse(event.body);
   console.log("event body: " + JSON.stringify(body));
   const captcha = body["g-recaptcha-response"];
