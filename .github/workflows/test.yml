@@ -1,4 +1,4 @@
-name: TEST-ENV-DEPLOYMENT
+name: TEST
 # Build and deploy TEST instance for every push to a pull-request
 
 on:

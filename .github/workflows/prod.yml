@@ -1,4 +1,4 @@
-name: PROD-ENV-DEPLOYMENT
+name: PROD
 # Build and deploy PROD instance for every push to master
 
 on:
