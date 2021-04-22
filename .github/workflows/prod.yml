@@ -53,7 +53,7 @@ jobs:
           SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
         run: |
           npx sls deploy --stage dev --verbose
-      - name: Set domain
+      - name: Set domain for deployment
         run: |
           echo "domain=${{ secrets.PROD_DOMAIN || 'formuljar.maslick.ru' }}" >> $GITHUB_ENV
       - name: Deploy to S3 and invalidate cache
@@ -61,7 +61,7 @@ jobs:
           API_URL: ${{ secrets.API_URL || 'https://formuljar-api.maslick.ru' }}
           CAPTCHA_PUBLIC: ${{ secrets.CAPTCHA_PUBLIC }}
           CLOUFRONT_ID: ${{ secrets.CLOUFRONT_ID }}
-          S3_BUCKET: ${{ secrets.S3_BUCKET || 'formuljar-dev' }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET || 'formuljar-prod' }}
         run: ./s3-sync.sh
       - name: Update deployment status
         uses: bobheadxi/deployments@v0.4.3

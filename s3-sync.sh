@@ -3,7 +3,7 @@
 : "${API_URL:="https://formuljar-api.maslick.ru"}"
 : "${CAPTCHA_PUBLIC:="6LeqCNkZAAAAAMeqnJ7R2UMdUADc8bdClUOOXDFo"}"
 : "${CLOUDFRONT_ID:="E2AODUM7T4OB8O"}"
-: "${S3_BUCKET:="formuljar-dev"}"
+: "${S3_BUCKET:="formuljar-prod"}"
 
 function substitute() {
     input_file=$1
