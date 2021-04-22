@@ -29,10 +29,10 @@ jobs:
           cache-name: cache-node-modules
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-qa-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-qa-${{ env.cache-name }}-
-            ${{ runner.os }}-qa-
+            ${{ runner.os }}-test-${{ env.cache-name }}-
+            ${{ runner.os }}-test-
             ${{ runner.os }}-
       - name: Install deps
         run: |
@@ -53,8 +53,8 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS_TEST }}
           SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID_TEST }}
         run: |
-          npx sls deploy --stage test --verbose
-      - name: Set domain
+          npm run deploy-test
+      - name: Set domain for deployment
         run: |
           echo "domain=${{ secrets.PROD_DOMAIN_TEST || 'formuljar-test.maslick.ru' }}" >> $GITHUB_ENV
       - name: Deploy to S3 and invalidate cache
