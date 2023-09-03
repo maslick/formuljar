@@ -17,8 +17,8 @@ a simple web form with extra security
 <br><img src="formuljar-aws.png">
 
 ## :lollipop: Demo
-* Prod: https://formuljar.maslick.ru
-* Test: https://formuljar-test.maslick.ru
+* Prod: https://formuljar.maslick.tech
+* Test: https://formuljar-test.maslick.tech
 
 ## :bulb: Motivation
 Often times businesses need a simple static web form to get user feedback and/or generate sales leads, so that customers
